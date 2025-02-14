@@ -46,7 +46,7 @@
  // Create loan amount column
  var startLoanAmount = 5000;
  var increment = 500;
- var maxLoanAmount = 700000;
+ var maxLoanAmount = 900000;
  var loanAmountColumn = {}; // Loan amount column
  var loans = [];
  var keyIndex = 14;
