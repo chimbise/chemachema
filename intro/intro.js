@@ -31,7 +31,7 @@
  var b10 = 1500; // Take-home married
  var b11 = 1300; // Take-home single
  var b12 = 600; // A3 to B1 pay scale
- var loanMax = 700000;
+ var loanMax = 900000;
  
  //secondary variables
  var d14 = 0; // d14 is ag14
