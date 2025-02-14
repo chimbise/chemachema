@@ -24,7 +24,7 @@
  var rt = 0.20; // Annual interest rate for 20%
  //var c5 = rt / 12; // Monthly interest rate for 23%
  var b6 = rt / 12;// Monthly interest for 23%
- var term = 96; // Loan term for 96 months
+ var term = 120; // Loan term for 96 months
  var b8 = 1.15; // Insurance
  var b9 = 0.0271; // Collections fee
  var c9 = 1 - b9; // Adjusted factor for collections fee
