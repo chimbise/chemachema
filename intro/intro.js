@@ -19,6 +19,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+let confirmationResult;
 
 // Initialize RecaptchaVerifier
 const recaptchaVerifier = new RecaptchaVerifier('recaptcha-container', {
@@ -36,49 +37,22 @@ function sendOTP() {
     .then((result) => {
       // SMS sent. Prompt user to type the code from the message, then use the code to sign in.
       confirmationResult = result;
+      document.getElementById("otpSection").style.display = "block";
+      document.getElementById("status").innerText = "OTP Sent!";
     }).catch((error) => {
       // Handle Errors here.
-      console.error("Error during signInWithPhoneNumber: ", error);
+      document.getElementById("status").innerText = error.message;
+
     });
 }
 // Initialize Firebase
 // const app = initializeApp(firebase);
 // const auth = getAuth(app);
-let confirmationResult;
 
 var sendOTPButton = document.getElementById("sendOTP")
 sendOTPButton.addEventListener("click",(e)=>{
   sendOTP()
 })
-  // function sendOTP() {
-  //     const phoneNumber = document.getElementById("phoneNumber").value;
-  //     // window.recaptchaVerifier = new RecaptchaVerifier('recaptcha-container', {
-  //     //     'size': 'invisible',
-  //     //     'callback': (response) => {
-  //     //           firebase.auth().signInWithPhoneNumber(phoneNumber, window.recaptchaVerifier)
-  //     //         .then(result => {
-  //     //             confirmationResult = result;
-  //     //             document.getElementById("otpSection").style.display = "block";
-  //     //             document.getElementById("status").innerText = "OTP Sent!";
-  //     //         })
-  //     //         .catch(error => {
-  //     //             document.getElementById("status").innerText = error.message;
-  //     //         });
-  //     //     }
-  //     // });
-      
-      
-  //     auth.signInWithPhoneNumber(phoneNumber, window.recaptchaVerifier)
-  //     .then(result => {
-  //         confirmationResult = result;
-  //         document.getElementById("otpSection").style.display = "block";
-  //         document.getElementById("status").innerText = "OTP Sent!";
-  //     })
-  //     .catch(error => {
-  //         document.getElementById("status").innerText = error.message;
-  //     });
-      
-  // }
 
 var verifyOTPButton = document.getElementById("verifyOTP")
 verifyOTPButton.addEventListener("click",(e)=>{
