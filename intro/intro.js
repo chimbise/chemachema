@@ -273,6 +273,7 @@
  
    // Function to update the loan term
    function updateLoanTerm() {
+
      term = loanTermDropdown.value;
      updateMonthlyAmountDisplay(loanAmountSlider.value);
    }
@@ -283,6 +284,16 @@
      rt = loanInterestDropdown.value;
      b6 = rt / 12;
  
+     const option120 = document.querySelector('#loanTermDropdown option[value="120"]');
+     const option108 = document.querySelector('#loanTermDropdown option[value="108"]');
+
+     if (rt !== 'botusafe 20' || rt !== 'botusafe 23' || rt !== 'botusafe 26') {
+      option120.disabled = false; // Enable only the 120 months option
+      option108.disabled = false; // Enable only the 120 months option
+     } else {
+      option120.disabled = true; // Enable only the 120 months option
+      option108.disabled = true; // Enable only the 120 months option
+     }
      switch (loanInterestDropdown.options[loanInterestDropdown.selectedIndex].textContent) {
        case "botusafe 23%":
          c9 = 1 - 0.0271;

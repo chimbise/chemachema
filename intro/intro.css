@@ -170,3 +170,16 @@ body {
     flex: 0 0 auto;
     border-radius: 5px;
 }
+
+.login {
+    display:none; /* Hide default arrows in Chrome, Safari, Edge */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width:100% ;
+    height:100%;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.603);
+}
