@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="intro.css">
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js"></script>
 </head>
 <body>
     <div class="container">
@@ -129,7 +131,17 @@
                 </div>
             </div>
             <div class="login" id="login">
-
+                <h2>Phone Number Verification</h2>
+                <input type="text" id="phoneNumber" placeholder="+1XXXXXXXXXX">
+                <button type="button" id="sendOTP">Send OTP</button>
+            
+                <div class="otpSection" id="otpSection" >
+                    <input type="text" id="otpCode" placeholder="Enter OTP">
+                    <button type="button" id="verifyOTP">Verify OTP</button>
+                </div>
+            
+                <div id="recaptcha-container"></div>
+                <p id="status"></p>
             </div>
             <button type="button" id="viewLoanDetails">View loan details</button>
         </div>

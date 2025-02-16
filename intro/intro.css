@@ -172,7 +172,7 @@ body {
 }
 
 .login {
-    display:none; /* Hide default arrows in Chrome, Safari, Edge */
+    display:block; /* Hide default arrows in Chrome, Safari, Edge */
     position: absolute;
     top: 50%;
     left: 50%;
@@ -181,5 +181,9 @@ body {
     height:100%;
     justify-content: center;
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.603);
+    background-color: rgba(0, 0, 0, 0.87);
+}
+.otpSection{
+    display: none;
+    
 }

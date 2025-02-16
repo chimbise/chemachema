@@ -1,24 +1,101 @@
-  // // Import the functions you need from the SDKs you need
-  // import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-  // import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
-  // // TODO: Add SDKs for Firebase products that you want to use
-  // // https://firebase.google.com/docs/web/setup#available-libraries
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+import { getAuth, signInWithPhoneNumber, RecaptchaVerifier } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 
-  // // Your web app's Firebase configuration
-  // // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  // const firebaseConfig = {
-  //   apiKey: "AIzaSyDTLc3laktKxsV7vQWpzKt56K_g5UinCQA",
-  //   authDomain: "simple-notes-58c6a.firebaseapp.com",
-  //   projectId: "simple-notes-58c6a",
-  //   storageBucket: "simple-notes-58c6a.appspot.com",
-  //   messagingSenderId: "565407370315",
-  //   appId: "1:565407370315:web:33f94fd05ca08cfbced1ce",
-  //   measurementId: "G-5NJXESFQNE"
-  // };
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyCVeRF7CM52jidngi4AmMJJ6dnOMhgAxko",
+  authDomain: "calc-c6b1c.firebaseapp.com",
+  projectId: "calc-c6b1c",
+  storageBucket: "calc-c6b1c.firebasestorage.app",
+  messagingSenderId: "751714875802",
+  appId: "1:751714875802:web:9ffa30b7ee66579c686223",
+  measurementId: "G-L3XCXKVY8R"
+};
 
-  // // Initialize Firebase
-  // const app = initializeApp(firebaseConfig);
-  // const analytics = getAnalytics(app);
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+// Initialize RecaptchaVerifier
+const recaptchaVerifier = new RecaptchaVerifier('recaptcha-container', {
+  'size': 'invisible',
+  'callback': (response) => {
+    // reCAPTCHA solved, allow sendOTP function to proceed
+    sendOTP();
+  }
+}, auth);
+
+function sendOTP() {
+  const phoneNumber = document.getElementById("phoneNumber").value;
+  const appVerifier = recaptchaVerifier;
+  signInWithPhoneNumber(auth, phoneNumber, appVerifier)
+    .then((result) => {
+      // SMS sent. Prompt user to type the code from the message, then use the code to sign in.
+      confirmationResult = result;
+    }).catch((error) => {
+      // Handle Errors here.
+      console.error("Error during signInWithPhoneNumber: ", error);
+    });
+}
+// Initialize Firebase
+// const app = initializeApp(firebase);
+// const auth = getAuth(app);
+let confirmationResult;
+
+var sendOTPButton = document.getElementById("sendOTP")
+sendOTPButton.addEventListener("click",(e)=>{
+  sendOTP()
+})
+  // function sendOTP() {
+  //     const phoneNumber = document.getElementById("phoneNumber").value;
+  //     // window.recaptchaVerifier = new RecaptchaVerifier('recaptcha-container', {
+  //     //     'size': 'invisible',
+  //     //     'callback': (response) => {
+  //     //           firebase.auth().signInWithPhoneNumber(phoneNumber, window.recaptchaVerifier)
+  //     //         .then(result => {
+  //     //             confirmationResult = result;
+  //     //             document.getElementById("otpSection").style.display = "block";
+  //     //             document.getElementById("status").innerText = "OTP Sent!";
+  //     //         })
+  //     //         .catch(error => {
+  //     //             document.getElementById("status").innerText = error.message;
+  //     //         });
+  //     //     }
+  //     // });
+      
+      
+  //     auth.signInWithPhoneNumber(phoneNumber, window.recaptchaVerifier)
+  //     .then(result => {
+  //         confirmationResult = result;
+  //         document.getElementById("otpSection").style.display = "block";
+  //         document.getElementById("status").innerText = "OTP Sent!";
+  //     })
+  //     .catch(error => {
+  //         document.getElementById("status").innerText = error.message;
+  //     });
+      
+  // }
+
+var verifyOTPButton = document.getElementById("verifyOTP")
+verifyOTPButton.addEventListener("click",(e)=>{
+
+  verifyOTP()
+})
+  function verifyOTP() {
+      const otpCode = document.getElementById("otpCode").value;
+      confirmationResult.confirm(otpCode)
+          .then(result => {
+              document.getElementById("status").innerText = "Phone Number Verified!";
+          })
+          .catch(error => {
+              document.getElementById("status").innerText = "Invalid OTP. Try again.";
+          });
+  }
+
 
  // Primary variables
  var rt = 0.20; // Annual interest rate for 20%
