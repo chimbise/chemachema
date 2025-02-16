@@ -24,14 +24,14 @@
  var rt = 0.20; // Annual interest rate for 20%
  //var c5 = rt / 12; // Monthly interest rate for 23%
  var b6 = rt / 12;// Monthly interest for 23%
- var term = 96; // Loan term for 96 months
+ var term = 120; // Loan term for 96 months
  var b8 = 1.15; // Insurance
  var b9 = 0.0271; // Collections fee
  var c9 = 1 - b9; // Adjusted factor for collections fee
  var b10 = 1500; // Take-home married
  var b11 = 1300; // Take-home single
  var b12 = 600; // A3 to B1 pay scale
- var loanMax = 700000;
+ var loanMax = 900000;
  
  //secondary variables
  var d14 = 0; // d14 is ag14
@@ -46,7 +46,7 @@
  // Create loan amount column
  var startLoanAmount = 5000;
  var increment = 500;
- var maxLoanAmount = 700000;
+ var maxLoanAmount = 900000;
  var loanAmountColumn = {}; // Loan amount column
  var loans = [];
  var keyIndex = 14;
