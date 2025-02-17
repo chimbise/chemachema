@@ -75,7 +75,7 @@ verifyOTPButton.addEventListener("click",(e)=>{
  var rt = 0.20; // Annual interest rate for 20%
  //var c5 = rt / 12; // Monthly interest rate for 23%
  var b6 = rt / 12;// Monthly interest for 23%
- var term = 96; // Loan term for 96 months
+ var term = 120; // Loan term for 96 months
  var b8 = 1.15; // Insurance
  var b9 = 0.0271; // Collections fee
  var c9 = 1 - b9; // Adjusted factor for collections fee
@@ -334,17 +334,7 @@ verifyOTPButton.addEventListener("click",(e)=>{
    function updateLoanInterest() {
      rt = loanInterestDropdown.value;
      b6 = rt / 12;
- 
-     const option120 = document.querySelector('#loanTermDropdown option[value="120"]');
-     const option108 = document.querySelector('#loanTermDropdown option[value="108"]');
 
-     if (rt !== 'botusafe 20' || rt !== 'botusafe 23' || rt !== 'botusafe 26') {
-      option120.disabled = false; // Enable only the 120 months option
-      option108.disabled = false; // Enable only the 120 months option
-     } else {
-      option120.disabled = true; // Enable only the 120 months option
-      option108.disabled = true; // Enable only the 120 months option
-     }
      switch (loanInterestDropdown.options[loanInterestDropdown.selectedIndex].textContent) {
        case "botusafe 23%":
          c9 = 1 - 0.0271;
