@@ -29,12 +29,16 @@ const recaptchaVerifier = new RecaptchaVerifier('recaptcha-container', {
     sendOTP();
   }
 }, auth);
+let lastOTPSentTime;
+const OTP_TIMEOUT = 10 * 60 * 1000; // 10 minutes
 
 function sendOTP() {
   const phoneNumber = document.getElementById("phoneNumber").value;
   const appVerifier = recaptchaVerifier;
   signInWithPhoneNumber(auth, "+267"+phoneNumber, appVerifier)
     .then((result) => {
+      // Track last OTP sent time
+      lastOTPSentTime = Date.now();
       // SMS sent. Prompt user to type the code from the message, then use the code to sign in.
       confirmationResult = result;
       document.getElementById("otpSection").style.display = "block";
@@ -69,6 +73,21 @@ verifyOTPButton.addEventListener("click",(e)=>{
               document.getElementById("status").innerText = "Invalid OTP. Try again.";
           });
   }
+
+// Function to check inactivity and resend OTP
+function checkInactivity() {
+  const now = Date.now();
+  if (now - lastOTPSentTime >= OTP_TIMEOUT) {
+    console.log("10 minutes passed, resending OTP...");
+    document.getElementById("login").style.display = "block";
+  }
+}
+// Detect if user leaves or returns
+document.addEventListener("visibilitychange", () => {
+  if (!document.hidden) {
+    checkInactivity(); // Resend OTP if inactive for 10 minutes
+  }
+});
 
 
  // Primary variables
