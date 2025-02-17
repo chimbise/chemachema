@@ -63,7 +63,7 @@ verifyOTPButton.addEventListener("click",(e)=>{
       const otpCode = document.getElementById("otpCode").value;
       confirmationResult.confirm(otpCode)
           .then(result => {
-              document.getElementById("login").style.display = "block";
+              document.getElementById("login").style.display = "none";
           })
           .catch(error => {
               document.getElementById("status").innerText = "Invalid OTP. Try again.";
