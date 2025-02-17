@@ -63,11 +63,9 @@ verifyOTPButton.addEventListener("click",(e)=>{
       const otpCode = document.getElementById("otpCode").value;
       confirmationResult.confirm(otpCode)
           .then(result => {
-            console.log('now')
-              document.getElementById("status").innerText = "Phone Number Verified!";
+              document.getElementById("login").style.display = "block";
           })
           .catch(error => {
-            console.log('error')
               document.getElementById("status").innerText = "Invalid OTP. Try again.";
           });
   }
