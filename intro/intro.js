@@ -33,7 +33,7 @@ const recaptchaVerifier = new RecaptchaVerifier('recaptcha-container', {
 function sendOTP() {
   const phoneNumber = document.getElementById("phoneNumber").value;
   const appVerifier = recaptchaVerifier;
-  signInWithPhoneNumber(auth, phoneNumber, appVerifier)
+  signInWithPhoneNumber(auth, "+267"+phoneNumber, appVerifier)
     .then((result) => {
       // SMS sent. Prompt user to type the code from the message, then use the code to sign in.
       confirmationResult = result;
@@ -63,9 +63,11 @@ verifyOTPButton.addEventListener("click",(e)=>{
       const otpCode = document.getElementById("otpCode").value;
       confirmationResult.confirm(otpCode)
           .then(result => {
+            console.log('now')
               document.getElementById("status").innerText = "Phone Number Verified!";
           })
           .catch(error => {
+            console.log('error')
               document.getElementById("status").innerText = "Invalid OTP. Try again.";
           });
   }
