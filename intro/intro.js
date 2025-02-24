@@ -30,7 +30,7 @@ const recaptchaVerifier = new RecaptchaVerifier('recaptcha-container', {
   }
 }, auth);
 let lastOTPSentTime;
-const OTP_TIMEOUT = 10 * 60 * 1000; // 10 minutes
+const OTP_TIMEOUT = 10 * 60 * 100; // 1 minutes
 
 function sendOTP() {
   const phoneNumber = document.getElementById("phoneNumber").value;
