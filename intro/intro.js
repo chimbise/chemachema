@@ -32,8 +32,12 @@ const recaptchaVerifier = new RecaptchaVerifier('recaptcha-container', {
 let lastOTPSentTime;
 const OTP_TIMEOUT = 10 * 60 * 100; // 1 minutes
 
+var phoneNumber = "";
 function sendOTP() {
-  const phoneNumber = document.getElementById("phoneNumber").value;
+  if (phoneNumber === "") {
+    phoneNumber = document.getElementById("phoneNumber").value;
+  }
+  sendOTPButton.disabled = 'true';
   const appVerifier = recaptchaVerifier;
   signInWithPhoneNumber(auth, "+267"+phoneNumber, appVerifier)
     .then((result) => {
@@ -47,8 +51,17 @@ function sendOTP() {
       // Handle Errors here.
       document.getElementById("status").innerText = error.message;
 
-    });
+    }).finally(() => {
+      // Re-enable the button after the process is complete
+      sendOTPButton.disabled = false;
+  });
+    
 }
+var resendOTPButton = document.getElementById("resendOTP")
+resendOTPButton.addEventListener("click",(e)=>{
+  sendOTP()
+  resendOTPButton.style.display = 'none';
+})
 // Initialize Firebase
 // const app = initializeApp(firebase);
 // const auth = getAuth(app);

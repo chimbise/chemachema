@@ -172,18 +172,55 @@ body {
 }
 
 .login {
-    display:none; /* Hide default arrows in Chrome, Safari, Edge */
+    display:none;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width:50% ;
-    height:50%;
-    justify-content: center;
-    align-items:center;
-    background-color: rgba(0, 0, 0, 0.87);
+    width:100% ;
+    height:100%;
+    background-color: rgba(0, 0, 0, 0.952);
 }
+
+
+
+div.otpSection1 h2 {
+    color: aliceblue;
+}
+
+.otpSection1{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}
+
 .otpSection{
-    display: block;
-    
+    align-items: center;
+    display: none;
+    flex-direction: column;
+    margin-top: 50px;
+}
+
+.right:hover{
+    text-decoration: underline;
+    cursor:grab
+}
+.left:hover{
+    background-color: darkgray;
+    cursor:grab
+}
+
+.right{
+    background-color: #6bff6b00;
+    border: 0px;
+    color: red;
+    margin-left: 5px;
+}
+.left{
+    margin-left: 5px;
+    border: 0px;
+}
+.npp{
+    margin: 15px;
 }
