@@ -225,3 +225,23 @@ div.otpSection1 h2 {
 .npp{
     margin: 15px;
 }
+.notification{
+    position: absolute;
+    top: 13%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: large;
+    background-color: yellow; /* Green background */
+    color: red;
+    padding: 16px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    transition: opacity 0.5s ease; /* Animate opacity */
+    opacity: 0;
+    visibility: hidden; /* Hidden by default */
+}
+/* Show the notification */
+.notification.show {
+    visibility: visible;
+    opacity: 1;
+}

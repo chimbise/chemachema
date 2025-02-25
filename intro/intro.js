@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
 import { getAuth, signInWithPhoneNumber, RecaptchaVerifier } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
-import { getFirestore, collection, getDocs, query, where } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+//import { getFirestore, collection, getDocs, query, where } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -21,8 +21,8 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-const db = getFirestore(); // Firestore reference
-const usersRef = collection(db, "registered_users"); // Reference to collection
+//const db = getFirestore(); // Firestore reference
+//const usersRef = collection(db, "registered_users"); // Reference to collection
 
 let confirmationResult;
 
@@ -94,7 +94,20 @@ var sendOTPButton = document.getElementById("sendOTP")
 sendOTPButton.addEventListener("click",(e)=>{
   sendOTP()
 })
+var registerButton = document.getElementById("register")
+registerButton.addEventListener("click",(e)=>{
+  showNotification('Entered nunmber is not registered, ')
+})
 
+function showNotification(text) {
+  const notification = document.getElementById('notification');
+  notification.textContent = text;
+      notification.classList.add('show');
+  // Hide the notification after 3 seconds
+  setTimeout(() => {
+      notification.classList.remove('show');
+  }, 5000);
+}
 var verifyOTPButton = document.getElementById("verifyOTP")
 verifyOTPButton.addEventListener("click",(e)=>{
 
