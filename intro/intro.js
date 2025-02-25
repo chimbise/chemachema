@@ -1,5 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
-import { getAuth, signInWithPhoneNumber, RecaptchaVerifier } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"
+import { getAuth, signInWithPhoneNumber, RecaptchaVerifier } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+import { getFirestore, collection, getDocs, query, where } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -19,6 +21,9 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const db = getFirestore(); // Firestore reference
+const usersRef = collection(db, "registered_users"); // Reference to collection
+
 let confirmationResult;
 
 // Initialize RecaptchaVerifier
@@ -33,30 +38,49 @@ let lastOTPSentTime;
 const OTP_TIMEOUT = 10 * 60 * 100; // 1 minutes
 
 var phoneNumber = "";
+
+
+
+
 function sendOTP() {
   if (phoneNumber === "") {
     phoneNumber = document.getElementById("phoneNumber").value;
   }
   sendOTPButton.disabled = 'true';
-  const appVerifier = recaptchaVerifier;
-  signInWithPhoneNumber(auth, "+267"+phoneNumber, appVerifier)
-    .then((result) => {
-      // Track last OTP sent time
-      lastOTPSentTime = Date.now();
-      // SMS sent. Prompt user to type the code from the message, then use the code to sign in.
-      confirmationResult = result;
-      document.getElementById("otpSection").style.display = "block";
-      document.getElementById("status").innerText = "OTP Sent!";
-    }).catch((error) => {
-      // Handle Errors here.
-      document.getElementById("status").innerText = error.message;
 
-    }).finally(() => {
-      // Re-enable the button after the process is complete
+  // Check if phone number exists in Firestore
+const phoneQuery = query(usersRef, where("phoneNumber", "==", "+267" + phoneNumber)); 
+getDocs(phoneQuery)
+    .then((querySnapshot) => {
+        if (querySnapshot.empty) {
+            document.getElementById("status").innerText = "Phone number not registered!";
+            sendOTPButton.disabled = false;
+            return;
+        }
+      const appVerifier = recaptchaVerifier;
+      signInWithPhoneNumber(auth, "+267"+phoneNumber, appVerifier)
+        .then((result) => {
+          // Track last OTP sent time
+          lastOTPSentTime = Date.now();
+          // SMS sent. Prompt user to type the code from the message, then use the code to sign in.
+          confirmationResult = result;
+          document.getElementById("otpSection").style.display = "block";
+          document.getElementById("status").innerText = "OTP Sent!";
+        }).catch((error) => {
+          // Handle Errors here.
+          document.getElementById("status").innerText = error.message;
+
+        }).finally(() => {
+          // Re-enable the button after the process is complete
+          sendOTPButton.disabled = false;
+      });
+    })
+    .catch((error) => {
+      document.getElementById("status").innerText = "Error checking phone number!";
       sendOTPButton.disabled = false;
-  });
-    
+    }); 
 }
+
 var resendOTPButton = document.getElementById("resendOTP")
 resendOTPButton.addEventListener("click",(e)=>{
   sendOTP()
