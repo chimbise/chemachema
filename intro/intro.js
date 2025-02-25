@@ -35,7 +35,7 @@ const recaptchaVerifier = new RecaptchaVerifier('recaptcha-container', {
   }
 }, auth);
 let lastOTPSentTime;
-const OTP_TIMEOUT = 10 * 60 * 1000; // 1 minutes
+const OTP_TIMEOUT = 10 * 60 * 2000; // 1 minutes
 
 var phoneNumber = "00";
 
@@ -138,6 +138,9 @@ function checkInactivity() {
   if (now - lastOTPSentTime >= OTP_TIMEOUT) {
     console.log("10 minutes passed, resending OTP...");
     document.getElementById("login").style.display = "block";
+    document.getElementById("otpSection1").style.display = "block";
+    document.getElementById("otpSection").style.display = "none";
+
   }
 }
 // Detect if user leaves or returns
