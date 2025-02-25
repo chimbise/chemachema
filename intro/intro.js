@@ -53,7 +53,7 @@ function sendOTP() {
   sendOTPButton.disabled = 'true';
 
   // Check if phone number exists in Firestore
-const phoneQuery = query(usersRef, where("phoneNumber", "==", "+267" + phoneNumber)); 
+const phoneQuery = query(usersRef, where("phoneNumber", "==", phoneNumber)); 
 getDocs(phoneQuery)
     .then((querySnapshot) => {
         if (querySnapshot.empty) {
@@ -104,7 +104,7 @@ sendOTPButton.addEventListener("click",(e)=>{
 })
 var registerButton = document.getElementById("register")
 registerButton.addEventListener("click",(e)=>{
-  showNotification('Entered nunmber is not registered, ')
+  showNotification('Call 78282260 for registration')
 })
 
 function showNotification(text) {
