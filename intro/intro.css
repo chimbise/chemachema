@@ -197,8 +197,8 @@ div.otpSection1 h2 {
 }
 
 .otpSection{
-    align-items: center;
     display: none;
+    align-items: center;
     flex-direction: column;
     margin-top: 50px;
 }

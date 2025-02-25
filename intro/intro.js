@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
 import { getAuth, signInWithPhoneNumber, RecaptchaVerifier } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
-//import { getFirestore, collection, getDocs, query, where } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+import { getFirestore, collection, getDocs, query, where } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -21,8 +21,8 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-//const db = getFirestore(); // Firestore reference
-//const usersRef = collection(db, "registered_users"); // Reference to collection
+const db = getFirestore(); // Firestore reference
+const usersRef = collection(db, "registered_users"); // Reference to collection
 
 let confirmationResult;
 
@@ -35,15 +35,19 @@ const recaptchaVerifier = new RecaptchaVerifier('recaptcha-container', {
   }
 }, auth);
 let lastOTPSentTime;
-const OTP_TIMEOUT = 10 * 60 * 100; // 1 minutes
+const OTP_TIMEOUT = 10 * 60 * 1000; // 1 minutes
 
-var phoneNumber = "";
+var phoneNumber = "00";
 
 
 
 
 function sendOTP() {
-  if (phoneNumber === "") {
+
+  // const num = Number(phoneNumber);
+  // return !isNaN(num) && /^\d{8}$/.test(input);
+
+  if (phoneNumber.length !== 8) {
     phoneNumber = document.getElementById("phoneNumber").value;
   }
   sendOTPButton.disabled = 'true';
@@ -53,7 +57,8 @@ const phoneQuery = query(usersRef, where("phoneNumber", "==", "+267" + phoneNumb
 getDocs(phoneQuery)
     .then((querySnapshot) => {
         if (querySnapshot.empty) {
-            document.getElementById("status").innerText = "Phone number not registered!";
+            //document.getElementById("status").innerText = "Phone number not registered!";
+            showNotification("Entered nunmber is not registered, call 78282260 for registration")
             sendOTPButton.disabled = false;
             return;
         }
@@ -64,11 +69,13 @@ getDocs(phoneQuery)
           lastOTPSentTime = Date.now();
           // SMS sent. Prompt user to type the code from the message, then use the code to sign in.
           confirmationResult = result;
-          document.getElementById("otpSection").style.display = "block";
-          document.getElementById("status").innerText = "OTP Sent!";
+          document.getElementById("otpSection").style.display = "flex";
+          document.getElementById("otpSection1").style.display = "none";
+          showNotification("OTP sent!")
+          //document.getElementById("status").innerText = "OTP Sent!";
         }).catch((error) => {
           // Handle Errors here.
-          document.getElementById("status").innerText = error.message;
+          showNotification(error.message);
 
         }).finally(() => {
           // Re-enable the button after the process is complete
@@ -76,7 +83,8 @@ getDocs(phoneQuery)
       });
     })
     .catch((error) => {
-      document.getElementById("status").innerText = "Error checking phone number!";
+      //document.getElementById("status").innerText = "Error checking phone number!";
+      showNotification(error.message);
       sendOTPButton.disabled = false;
     }); 
 }
