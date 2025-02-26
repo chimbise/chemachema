@@ -75,7 +75,7 @@ getDocs(phoneQuery)
           //document.getElementById("status").innerText = "OTP Sent!";
         }).catch((error) => {
           // Handle Errors here.
-          showNotification(error.message);
+          showNotification('aaaah'+error.message);
 
         }).finally(() => {
           // Re-enable the button after the process is complete
