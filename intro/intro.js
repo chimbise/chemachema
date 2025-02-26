@@ -58,7 +58,7 @@ getDocs(phoneQuery)
     .then((querySnapshot) => {
         if (querySnapshot.empty) {
             //document.getElementById("status").innerText = "Phone number not registered!";
-            showNotification("Entered nunmber is not registered, call 78282260 for registration")
+            showNotification("Entered nunmber is not registered, call/whatsapp 78282260 for registration")
             sendOTPButton.disabled = false;
             return;
         }
@@ -104,7 +104,7 @@ sendOTPButton.addEventListener("click",(e)=>{
 })
 var registerButton = document.getElementById("register")
 registerButton.addEventListener("click",(e)=>{
-  showNotification('Call 78282260 for registration')
+  showNotification('Call/whatsapp 78282260 for registration')
 })
 
 function showNotification(text) {
