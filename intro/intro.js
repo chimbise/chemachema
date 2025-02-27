@@ -35,7 +35,7 @@ const recaptchaVerifier = new RecaptchaVerifier('recaptcha-container', {
   }
 }, auth);
 let lastOTPSentTime;
-const OTP_TIMEOUT = 10 * 60 * 2000; // 1 minutes
+const OTP_TIMEOUT = 10 * 60 * 36000; // 6 hours
 
 var phoneNumber = "00";
 
@@ -75,7 +75,7 @@ getDocs(phoneQuery)
           //document.getElementById("status").innerText = "OTP Sent!";
         }).catch((error) => {
           // Handle Errors here.
-          // showNotification('aaaah'+error.message);
+          showNotification('aaaah'+error.message);
 
         }).finally(() => {
           // Re-enable the button after the process is complete
