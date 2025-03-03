@@ -63,8 +63,6 @@ function sendOTP() {
   if (phoneNumber.length !== 8) {
     phoneNumber = document.getElementById("phoneNumber").value;
   }
-          document.getElementById("otpSection").style.display = "flex";
-          document.getElementById("otpSection1").style.display = "none";
 
   const phoneQuery = query(usersRef, where("phoneNumber", "==", phoneNumber)); 
   getDocs(phoneQuery)
