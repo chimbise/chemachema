@@ -104,7 +104,8 @@ getDocs(phoneQuery)
     })
     .catch((error) => {
       //document.getElementById("status").innerText = "Error checking phone number!";
-      showNotification("getdoc error");
+      showNotification(error.message);
+      console.log(error.message)
       sendOTPButton.disabled = false;
     }); 
 }
