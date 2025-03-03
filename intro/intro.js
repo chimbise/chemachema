@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
 import { getAuth, signInWithPhoneNumber, RecaptchaVerifier } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
-import { getFirestore, collection, updateDoc ,doc,getDoc, getDocs, query, where } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+import { getFirestore, collection,Timestamp, setDoc ,doc,getDoc, getDocs, query, where } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -24,46 +24,35 @@ const auth = getAuth(app);
 const db = getFirestore(); // Firestore reference
 const usersRef = collection(db, "registered_users"); // Reference to collection
 
-// let confirmationResult;
-
-// Initialize RecaptchaVerifier
-// const recaptchaVerifier = new RecaptchaVerifier('recaptcha-container', {
-//   'size': 'invisible',
-//   'callback': (response) => {
-//     // reCAPTCHA solved, allow sendOTP function to proceed
-//     sendOTP();
-//   }
-// }, auth);
-
 var phoneNumber = "00";
 
+let lastOTPTime;
+
 function canRequestOTP() {
-  const lastOTPTime = localStorage.getItem("lastOTPTime");
 
-    if (lastOTPTime) {
-        const lastOTPTimestamp = parseInt(lastOTPTime);
-        const currentTime = Date.now();
-        const hoursPassed = (currentTime - lastOTPTimestamp) / (1000 * 60 * 60); // Convert ms to hours
+        const currentTime = Timestamp.now();
 
-        if (hoursPassed < 3) {
-            document.getElementById("status").innerText = `OTP already sent. Try again in ${Math.ceil(3 - hoursPassed)} hours.`;
+
+        // Convert Firestore Timestamps to JavaScript Date objects
+        const lastOTPDate = lastOTPTime.toDate();
+        const currentDate = currentTime.toDate();
+        const hoursPassed = (currentDate - lastOTPDate) / (1000 * 60 * 60); // Convert ms to hours
+
+        if (hoursPassed < 0.0625) {  //3.75 minutes
+            showNotification(`OTP already sent. Try again in ${Math.ceil(3 - hoursPassed)} hours.`);
             document.getElementById("otpSection").style.display = "block";
             return false; // Don't allow OTP request
         }
-    }
 
   return true; // Allow sendOTP() to run
 }
 
 var pass = "12345";
-var idx = "";
+let idx;
 function sendOTP() {
-
-
   if (phoneNumber.length !== 8) {
     phoneNumber = document.getElementById("phoneNumber").value;
   }
-
   const phoneQuery = query(usersRef, where("phoneNumber", "==", phoneNumber)); 
   getDocs(phoneQuery)
       .then((querySnapshot) => {
@@ -74,13 +63,19 @@ function sendOTP() {
           }else{
             querySnapshot.forEach((doc) => {
               pass = doc.data().password; // Get the password field
+              lastOTPTime = doc.data().createdAt;
               idx = doc.id;
               });
           }
 
+          var x = canRequestOTP();
+          if (x) {
             document.getElementById("otpSection").style.display = "flex";
             document.getElementById("otpSection1").style.display = "none";
-
+          } else {
+            showNotification("your login is active on another device")
+//delete createdAt to reset------------------------------------------------------------------------------
+          }
       })
       .catch((error) => {
         showNotification(error.message);
@@ -130,10 +125,26 @@ verifyOTPButton.addEventListener("click",(e)=>{
         document.getElementById("iform").style.display = "block";
       } else if (otpCode === pass) {
         document.getElementById("login").style.display = "none";
-        localStorage.setItem("lastOTPTime", Date.now()); // Store current timestamp
+        recordTime()
       } else{
         showNotification("incorrect passsword")
       }
+  }
+async  function recordTime() {
+    try {
+      // Reference the document by ID
+      const userRef = doc(db, "registered_users", idx);          
+      // Get the document
+      const userSnap = await getDoc(userRef);  
+      if (userSnap.exists()) {
+          await setDoc(userRef, { 
+            createdAt: Timestamp.now()
+        }, { merge: true });
+
+      } 
+  } catch (error) {
+      console.error("Error resetting password: ", error);
+  }
   }
   const input = document.getElementById("digitInput");
   const button = document.getElementById("submitBtn");
@@ -157,11 +168,13 @@ verifyOTPButton.addEventListener("click",(e)=>{
           const userSnap = await getDoc(userRef);  
           if (userSnap.exists()) {
               // Update the password field
-              await updateDoc(userRef, {
-                  password: newPassword // Set to an empty string or a new value
-              });  
+              await setDoc(userRef, { 
+                password: newPassword
+            }, { merge: true });
               document.getElementById("iform").style.display = "none";
+              pass = newPassword;
               showNotification("Password reset successfully!");
+
           } else {
               showNotification("User not found!");
           }
