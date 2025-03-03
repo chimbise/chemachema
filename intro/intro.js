@@ -126,10 +126,10 @@ verifyOTPButton.addEventListener("click",(e)=>{
        const otpCode = document.getElementById("otpCode").value;
       // confirmationResult.confirm(otpCode)
       //     .then(result => {
-      if (otpCode == "12345"){
+      if (otpCode === "12345"){
         var passchange = document.getElementById("iform")
         passchange.style.display = "block";
-      } else if (otpCode == pass) {
+      } else if (otpCode === pass) {
         document.getElementById("login").style.display = "none";
         localStorage.setItem("lastOTPTime", Date.now()); // Store current timestamp
       } else{
