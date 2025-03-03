@@ -127,8 +127,7 @@ verifyOTPButton.addEventListener("click",(e)=>{
       // confirmationResult.confirm(otpCode)
       //     .then(result => {
       if (otpCode === "12345"){
-        var passchange = document.getElementById("iform")
-        passchange.style.display = "block";
+        document.getElementById("iform").style.display = "block";
       } else if (otpCode === pass) {
         document.getElementById("login").style.display = "none";
         localStorage.setItem("lastOTPTime", Date.now()); // Store current timestamp
@@ -161,7 +160,7 @@ verifyOTPButton.addEventListener("click",(e)=>{
               await updateDoc(userRef, {
                   password: newPassword // Set to an empty string or a new value
               });  
-              passchange.style.display = "none";
+              document.getElementById("iform").style.display = "none";
               showNotification("Password reset successfully!");
           } else {
               showNotification("User not found!");
