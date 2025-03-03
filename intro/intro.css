@@ -172,7 +172,7 @@ body {
 }
 
 .login {
-    display:block;
+    display:none;
     position: absolute;
     top: 50%;
     left: 50%;
