@@ -77,10 +77,14 @@ getDocs(phoneQuery)
             showNotification("Entered nunmber is not registered, call/whatsapp 78282260 for registration")
             sendOTPButton.disabled = false;
             return;
-        }
-        querySnapshot.forEach((doc) => {
-          console.log(doc.id, " => ", doc.data());
+        }else{
+          // Loop through the query results (even if there should only be one)
+          querySnapshot.forEach((doc) => {
+            const password = doc.data().password; // Get the password field
+            console.log("Password:", password);
+            // Use the password value as needed
         });
+        }
      //pass = doc.data().password;
       //console.log(pass)
 
