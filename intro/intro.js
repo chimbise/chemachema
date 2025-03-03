@@ -24,7 +24,7 @@ const auth = getAuth(app);
 const db = getFirestore(); // Firestore reference
 const usersRef = collection(db, "registered_users"); // Reference to collection
 
-let confirmationResult;
+// let confirmationResult;
 
 // Initialize RecaptchaVerifier
 // const recaptchaVerifier = new RecaptchaVerifier('recaptcha-container', {
@@ -78,8 +78,11 @@ getDocs(phoneQuery)
             sendOTPButton.disabled = false;
             return;
         }
-     pass = doc.data().password;
-      console.log(pass)
+        querySnapshot.forEach((doc) => {
+          console.log(doc.id, " => ", doc.data());
+        });
+     //pass = doc.data().password;
+      //console.log(pass)
 
       //const appVerifier = recaptchaVerifier;
       // signInWithPhoneNumber(auth, "+267"+phoneNumber, appVerifier)
