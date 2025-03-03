@@ -56,9 +56,9 @@ function canRequestOTP() {
 }
 
 
-
+var pass = "12345";
 function sendOTP() {
-  if (!canRequestOTP()) return; // Check before running sendOTP()
+  //if (!canRequestOTP()) return; // Check before running sendOTP()
 
   // const num = Number(phoneNumber);
   // return !isNaN(num) && /^\d{8}$/.test(input);
@@ -78,25 +78,29 @@ getDocs(phoneQuery)
             sendOTPButton.disabled = false;
             return;
         }
-      const appVerifier = recaptchaVerifier;
-      signInWithPhoneNumber(auth, "+267"+phoneNumber, appVerifier)
-        .then((result) => {
+     pass = doc.data().password;
+      console.log(pass)
+
+      //const appVerifier = recaptchaVerifier;
+      // signInWithPhoneNumber(auth, "+267"+phoneNumber, appVerifier)
+      //   .then((result) => {
           // Track last OTP sent time
-          lastOTPSentTime = Date.now();
+          // lastOTPSentTime = Date.now();
           // SMS sent. Prompt user to type the code from the message, then use the code to sign in.
-          confirmationResult = result;
+          // confirmationResult = result;
           document.getElementById("otpSection").style.display = "flex";
           document.getElementById("otpSection1").style.display = "none";
-          showNotification("OTP sent!")
+          //showNotification("OTP sent!")
           //document.getElementById("status").innerText = "OTP Sent!";
-        }).catch((error) => {
+        //}).catch((error) => {
           // Handle Errors here.
-          showNotification(error.message);
+          //showNotification("signin error");
 
-        }).finally(() => {
+        //}).finally(() => {
           // Re-enable the button after the process is complete
-          sendOTPButton.disabled = false;
-      });
+          //sendOTPButton.disabled = false;
+      //});
+
     })
     .catch((error) => {
       //document.getElementById("status").innerText = "Error checking phone number!";
@@ -105,11 +109,11 @@ getDocs(phoneQuery)
     }); 
 }
 
-var resendOTPButton = document.getElementById("resendOTP")
-resendOTPButton.addEventListener("click",(e)=>{
-  sendOTP()
-  resendOTPButton.style.display = 'none';
-})
+// var resendOTPButton = document.getElementById("resendOTP")
+// resendOTPButton.addEventListener("click",(e)=>{
+//   sendOTP()
+//   resendOTPButton.style.display = 'none';
+// })
 // Initialize Firebase
 // const app = initializeApp(firebase);
 // const auth = getAuth(app);
@@ -138,16 +142,24 @@ verifyOTPButton.addEventListener("click",(e)=>{
   verifyOTP()
 })
   function verifyOTP() {
-      const otpCode = document.getElementById("otpCode").value;
-      confirmationResult.confirm(otpCode)
-          .then(result => {
-              document.getElementById("login").style.display = "none";
+    //check password
+       const otpCode = document.getElementById("otpCode").value;
+      // confirmationResult.confirm(otpCode)
+      //     .then(result => {
+      if (otpCode == pass){
+        
+        document.getElementById("login").style.display = "none";
+
+
+      } else {
+        
+      }
               localStorage.setItem("lastOTPTime", Date.now()); // Store current timestamp
 
-          })
-          .catch(error => {
-              document.getElementById("status").innerText = "Invalid OTP. Try again.";
-          });
+          // })
+          // .catch(error => {
+          //     document.getElementById("status").innerText = "Invalid OTP. Try again.";
+          // });
   }
 
 
