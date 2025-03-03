@@ -161,6 +161,7 @@ verifyOTPButton.addEventListener("click",(e)=>{
               await updateDoc(userRef, {
                   password: newPassword // Set to an empty string or a new value
               });  
+              passchange.style.display = "none";
               showNotification("Password reset successfully!");
           } else {
               showNotification("User not found!");
