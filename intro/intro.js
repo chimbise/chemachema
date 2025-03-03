@@ -27,13 +27,13 @@ const usersRef = collection(db, "registered_users"); // Reference to collection
 let confirmationResult;
 
 // Initialize RecaptchaVerifier
-const recaptchaVerifier = new RecaptchaVerifier('recaptcha-container', {
-  'size': 'invisible',
-  'callback': (response) => {
-    // reCAPTCHA solved, allow sendOTP function to proceed
-    sendOTP();
-  }
-}, auth);
+// const recaptchaVerifier = new RecaptchaVerifier('recaptcha-container', {
+//   'size': 'invisible',
+//   'callback': (response) => {
+//     // reCAPTCHA solved, allow sendOTP function to proceed
+//     sendOTP();
+//   }
+// }, auth);
 
 var phoneNumber = "00";
 
@@ -67,7 +67,7 @@ function sendOTP() {
     phoneNumber = document.getElementById("phoneNumber").value;
   }
   sendOTPButton.disabled = 'true';
-
+console.log(phoneNumber)
   // Check if phone number exists in Firestore
 const phoneQuery = query(usersRef, where("phoneNumber", "==", phoneNumber)); 
 getDocs(phoneQuery)
@@ -151,9 +151,7 @@ verifyOTPButton.addEventListener("click",(e)=>{
         document.getElementById("login").style.display = "none";
 
 
-      } else {
-        
-      }
+      } 
               localStorage.setItem("lastOTPTime", Date.now()); // Store current timestamp
 
           // })
