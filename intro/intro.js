@@ -34,15 +34,31 @@ const recaptchaVerifier = new RecaptchaVerifier('recaptcha-container', {
     sendOTP();
   }
 }, auth);
-let lastOTPSentTime;
-const OTP_TIMEOUT = 10 * 60 * 36000; // 6 hours
 
 var phoneNumber = "00";
 
+function canRequestOTP() {
+  const lastOTPTime = localStorage.getItem("lastOTPTime");
+
+    if (lastOTPTime) {
+        const lastOTPTimestamp = parseInt(lastOTPTime);
+        const currentTime = Date.now();
+        const hoursPassed = (currentTime - lastOTPTimestamp) / (1000 * 60 * 60); // Convert ms to hours
+
+        if (hoursPassed < 3) {
+            document.getElementById("status").innerText = `OTP already sent. Try again in ${Math.ceil(3 - hoursPassed)} hours.`;
+            document.getElementById("otpSection").style.display = "block";
+            return false; // Don't allow OTP request
+        }
+    }
+
+  return true; // Allow sendOTP() to run
+}
 
 
 
 function sendOTP() {
+  if (!canRequestOTP()) return; // Check before running sendOTP()
 
   // const num = Number(phoneNumber);
   // return !isNaN(num) && /^\d{8}$/.test(input);
@@ -126,29 +142,13 @@ verifyOTPButton.addEventListener("click",(e)=>{
       confirmationResult.confirm(otpCode)
           .then(result => {
               document.getElementById("login").style.display = "none";
+              localStorage.setItem("lastOTPTime", Date.now()); // Store current timestamp
+
           })
           .catch(error => {
               document.getElementById("status").innerText = "Invalid OTP. Try again.";
           });
   }
-
-// Function to check inactivity and resend OTP
-function checkInactivity() {
-  const now = Date.now();
-  if (now - lastOTPSentTime >= OTP_TIMEOUT) {
-    console.log("10 minutes passed, resending OTP...");
-    document.getElementById("login").style.display = "block";
-    document.getElementById("otpSection1").style.display = "block";
-    document.getElementById("otpSection").style.display = "none";
-
-  }
-}
-// Detect if user leaves or returns
-document.addEventListener("visibilitychange", () => {
-  if (!document.hidden) {
-    checkInactivity(); // Resend OTP if inactive for 10 minutes
-  }
-});
 
 
  // Primary variables
