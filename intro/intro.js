@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
 import { getAuth, signInWithPhoneNumber, RecaptchaVerifier } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
-import { getFirestore, collection, doc, getDocs, query, where } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+import { getFirestore, collection, updateDoc ,doc,getDoc, getDocs, query, where } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -55,66 +55,40 @@ function canRequestOTP() {
   return true; // Allow sendOTP() to run
 }
 
-
 var pass = "12345";
+var idx = "";
 function sendOTP() {
-  //if (!canRequestOTP()) return; // Check before running sendOTP()
 
-  // const num = Number(phoneNumber);
-  // return !isNaN(num) && /^\d{8}$/.test(input);
 
   if (phoneNumber.length !== 8) {
     phoneNumber = document.getElementById("phoneNumber").value;
   }
-  sendOTPButton.disabled = 'true';
-console.log(phoneNumber)
-  // Check if phone number exists in Firestore
-const phoneQuery = query(usersRef, where("phoneNumber", "==", phoneNumber)); 
-getDocs(phoneQuery)
-    .then((querySnapshot) => {
-        if (querySnapshot.empty) {
-            //document.getElementById("status").innerText = "Phone number not registered!";
-            showNotification("Entered nunmber is not registered, call/whatsapp 78282260 for registration")
-            sendOTPButton.disabled = false;
-            return;
-        }else{
-          // Loop through the query results (even if there should only be one)
-          querySnapshot.forEach((doc) => {
-            const password = doc.data().password; // Get the password field
-            console.log("Password:", password);
-            // Use the password value as needed
-        });
-        }
-     //pass = doc.data().password;
-      //console.log(pass)
-
-      //const appVerifier = recaptchaVerifier;
-      // signInWithPhoneNumber(auth, "+267"+phoneNumber, appVerifier)
-      //   .then((result) => {
-          // Track last OTP sent time
-          // lastOTPSentTime = Date.now();
-          // SMS sent. Prompt user to type the code from the message, then use the code to sign in.
-          // confirmationResult = result;
           document.getElementById("otpSection").style.display = "flex";
           document.getElementById("otpSection1").style.display = "none";
-          //showNotification("OTP sent!")
-          //document.getElementById("status").innerText = "OTP Sent!";
-        //}).catch((error) => {
-          // Handle Errors here.
-          //showNotification("signin error");
 
-        //}).finally(() => {
-          // Re-enable the button after the process is complete
-          //sendOTPButton.disabled = false;
-      //});
+  const phoneQuery = query(usersRef, where("phoneNumber", "==", phoneNumber)); 
+  getDocs(phoneQuery)
+      .then((querySnapshot) => {
+          if (querySnapshot.empty) {
+              showNotification("Entered nunmber is not registered, call/whatsapp 78282260 for registration")
+              sendOTPButton.disabled = false;
+              return;
+          }else{
+            querySnapshot.forEach((doc) => {
+              pass = doc.data().password; // Get the password field
+              idx = doc.id;
+              });
+          }
 
-    })
-    .catch((error) => {
-      //document.getElementById("status").innerText = "Error checking phone number!";
-      showNotification(error.message);
-      console.log(error.message)
-      sendOTPButton.disabled = false;
-    }); 
+            document.getElementById("otpSection").style.display = "flex";
+            document.getElementById("otpSection1").style.display = "none";
+
+      })
+      .catch((error) => {
+        showNotification(error.message);
+        console.log(error.message)
+        sendOTPButton.disabled = false;
+      }); 
 }
 
 // var resendOTPButton = document.getElementById("resendOTP")
@@ -154,19 +128,51 @@ verifyOTPButton.addEventListener("click",(e)=>{
        const otpCode = document.getElementById("otpCode").value;
       // confirmationResult.confirm(otpCode)
       //     .then(result => {
-      if (otpCode == pass){
-        
+      if (otpCode == "12345"){
+        var passchange = document.getElementById("iform")
+        passchange.style.display = "block";
+      } else if (otpCode == pass) {
         document.getElementById("login").style.display = "none";
-
-
-      } 
-              localStorage.setItem("lastOTPTime", Date.now()); // Store current timestamp
-
-          // })
-          // .catch(error => {
-          //     document.getElementById("status").innerText = "Invalid OTP. Try again.";
-          // });
+        localStorage.setItem("lastOTPTime", Date.now()); // Store current timestamp
+      } else{
+        showNotification("incorrect passsword")
+      }
   }
+  const input = document.getElementById("digitInput");
+  const button = document.getElementById("submitBtn");
+
+  input.addEventListener("input", () => {
+      // Enable button only when exactly 5 digits are entered
+      button.disabled = input.value.length !== 5 || isNaN(input.value);
+  });
+
+  document.getElementById("digitForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+    resetPassword(idx,input.value)
+  });
+
+  async function resetPassword(userId, newPassword) {
+      try {
+          // Reference the document by ID
+          const userRef = doc(db, "registered_users", userId);          
+          // Get the document
+          const userSnap = await getDoc(userRef);  
+          if (userSnap.exists()) {
+              // Update the password field
+              await updateDoc(userRef, {
+                  password: newPassword // Set to an empty string or a new value
+              });  
+              showNotification("Password reset successfully!");
+          } else {
+              showNotification("User not found!");
+          }
+      } catch (error) {
+          console.error("Error resetting password: ", error);
+      }
+  }  
+
+
 
 
  // Primary variables

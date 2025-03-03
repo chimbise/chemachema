@@ -145,14 +145,18 @@
                 </div>
             
                 <div class="otpSection" id="otpSection" >
-                    <input type="text" id="otpCode" placeholder="Enter OTP">
+                    <input type="text" id="otpCode" placeholder="Enter password">
                     <div class="npp">
                         <button class="left" type="button" id="verifyOTP">Login</button>
                     </div>
                 </div>
-            
-                <div id="recaptcha-container"></div>
-                <p id="status"></p>
+            </div>
+            <div class="iform" id="iform">
+                <form class="digitForm" id="digitForm">
+                    <h2>Enter new password</h2>
+                    <input type="text" id="digitInput" maxlength="5" placeholder="Enter 5 digits" required>
+                    <button type="submit" id="submitBtn" disabled>Submit</button>
+                </form>
             </div>
             <button type="button" id="viewLoanDetails">View loan details</button>
         </div>
