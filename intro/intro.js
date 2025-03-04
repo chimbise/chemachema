@@ -26,7 +26,7 @@ const usersRef = collection(db, "registered_users"); // Reference to collection
 
 var phoneNumber = "00";
 
-var lastOTPTime = Timestamp.now();
+var lastOTPTime;
 
 function canRequestOTP() {
 
@@ -63,7 +63,7 @@ function sendOTP() {
           }else{
             querySnapshot.forEach((doc) => {
               pass = doc.data().password; // Get the password field
-              lastOTPTime = doc.data().createdAt;
+              lastOTPTime = doc.data().createdAt || Timestamp.fromDate(new Date(0)); // Default to old date if missing
               idx = doc.id;
               });
           }
