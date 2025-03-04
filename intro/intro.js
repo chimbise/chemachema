@@ -26,7 +26,7 @@ const usersRef = collection(db, "registered_users"); // Reference to collection
 
 var phoneNumber = "00";
 
-var lastOTPTime;
+let lastOTPTime;
 
 function canRequestOTP() {
 
@@ -69,6 +69,9 @@ function sendOTP() {
           }
 
           console.log(lastOTPTime)
+          console.log(pass)
+          console.log(idx)
+
           var x = canRequestOTP();
           if (x) {
             document.getElementById("otpSection").style.display = "flex";
@@ -122,9 +125,9 @@ verifyOTPButton.addEventListener("click",(e)=>{
        const otpCode = document.getElementById("otpCode").value;
       // confirmationResult.confirm(otpCode)
       //     .then(result => {
-      if (otpCode === "12345"){
+      if (otpCode === pass&& pass === "12345"){
         document.getElementById("iform").style.display = "block";
-      } else if (otpCode === pass) {
+      } else if (otpCode === pass && pass !== "12345") {
         document.getElementById("login").style.display = "none";
         recordTime()
       } else{
@@ -139,10 +142,9 @@ async  function recordTime() {
       const userSnap = await getDoc(userRef);  
       if (userSnap.exists()) {
           await setDoc(userRef, { 
-            createdAt: Timestamp.now()
+            createdAt:Timestamp.now()
         }, { merge: true });
-
-      } 
+      }
   } catch (error) {
       console.error("Error resetting password: ", error);
   }
@@ -170,7 +172,8 @@ async  function recordTime() {
           if (userSnap.exists()) {
               // Update the password field
               await setDoc(userRef, { 
-                password: newPassword
+                password: newPassword,
+                createdAt:new Timestamp(Timestamp.now().seconds - 3 * 60 * 60, Timestamp.now().nanoseconds)
             }, { merge: true });
               document.getElementById("iform").style.display = "none";
               pass = newPassword;
