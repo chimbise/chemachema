@@ -68,6 +68,7 @@ function sendOTP() {
               });
           }
 
+          console.log(lastOTPTime)
           var x = canRequestOTP();
           if (x) {
             document.getElementById("otpSection").style.display = "flex";
