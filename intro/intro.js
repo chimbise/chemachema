@@ -26,7 +26,7 @@ const usersRef = collection(db, "registered_users"); // Reference to collection
 
 var phoneNumber = "00";
 
-let lastOTPTime;
+var lastOTPTime = Timestamp.now();
 
 function canRequestOTP() {
 
