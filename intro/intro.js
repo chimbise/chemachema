@@ -69,14 +69,14 @@ function sendOTP() {
           }
 
           console.log(lastOTPTime)
-//           var x = canRequestOTP();
-//           if (x) {
-//             document.getElementById("otpSection").style.display = "flex";
-//             document.getElementById("otpSection1").style.display = "none";
-//           } else {
-//             showNotification("your login is active on another device")
-// //delete createdAt to reset------------------------------------------------------------------------------
-//           }
+          var x = canRequestOTP();
+          if (x) {
+            document.getElementById("otpSection").style.display = "flex";
+            document.getElementById("otpSection1").style.display = "none";
+          } else {
+            showNotification("your login is active on another device")
+//delete createdAt to reset------------------------------------------------------------------------------
+          }
       })
       .catch((error) => {
         showNotification(error.message);
