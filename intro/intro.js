@@ -26,7 +26,6 @@ const usersRef = collection(db, "registered_users"); // Reference to collection
 
 var phoneNumber = "00";
 
-
 let lastOTPTime;
 
 function canRequestOTP(localTime) {
@@ -81,7 +80,7 @@ function sendOTP() {
               if (c) {
                 showNotification("you are currently logged on another device!")
                 return;
-              } 
+                } 
               document.getElementById("otpSection1").style.display = "none";
               document.getElementById("otpSection").style.display = "flex";
               });
@@ -95,12 +94,16 @@ function sendOTP() {
 }
 
  // Check locally stored OTP request time
+
  var b = localStorage.getItem("lastOTPTime");
 
  let lastOTPDateLocal; //= lastOTPLocal ? lastOTPLocal.toDate() : new Date(0);
 
  // Extract numbers using regex
- const match = b.match(/seconds=(\d+), nanoseconds=(\d+)/);
+ let match;
+ if (b) {
+  match = b.match(/seconds=(\d+), nanoseconds=(\d+)/);
+ }
 
  if (match) {
      const seconds = parseInt(match[1], 10);
@@ -116,9 +119,9 @@ function sendOTP() {
  }
  var x = canRequestOTP(lastOTPDateLocal);
  console.log(x)
- if (x) {
-   //document.getElementById("login").style.display = "none";
- } 
+//  if (x) {
+//    //document.getElementById("login").style.display = "none";
+//  } 
 
 // var resendOTPButton = document.getElementById("resendOTP")
 // resendOTPButton.addEventListener("click",(e)=>{
@@ -137,7 +140,6 @@ var registerButton = document.getElementById("register")
 registerButton.addEventListener("click",(e)=>{
   showNotification('Call/whatsapp 78282260 for registration')
 })
-
 function showNotification(text) {
   const notification = document.getElementById('notification');
   notification.textContent = text;
@@ -149,23 +151,22 @@ function showNotification(text) {
 }
 var verifyOTPButton = document.getElementById("verifyOTP")
 verifyOTPButton.addEventListener("click",(e)=>{
-
   verifyOTP()
 })
   function verifyOTP() {
     //check password
-       const otpCode = document.getElementById("otpCode").value;
-      // confirmationResult.confirm(otpCode)
-      //     .then(result => {
-      console.log(pass)
-      if (otpCode === pass&& pass === "12345"){
-        document.getElementById("iform").style.display = "block";
-      } else if (otpCode === pass && pass !== "12345") {
-        document.getElementById("login").style.display = "none";
-        recordTime()
-      } else{
-        showNotification("incorrect passsword")
-      }
+    const otpCode = document.getElementById("otpCode").value;
+    // confirmationResult.confirm(otpCode)
+    //     .then(result => {
+    console.log(pass)
+    if (otpCode === pass&& pass === "12345"){
+      document.getElementById("iform").style.display = "block";
+    } else if (otpCode === pass && pass !== "12345") {
+      document.getElementById("login").style.display = "none";
+      recordTime()
+    } else{
+      showNotification("incorrect passsword")
+    }
   }
 async  function recordTime() {
     try {
