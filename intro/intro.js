@@ -38,27 +38,24 @@ function canRequestOTP(localTime) {
         //const lastOTPDate = lastOTPTime.toDate();
         const currentDate = currentTime.toDate();
         //console.log(lastOTPDate)
-        console.log(localTime)
-        console.log(currentTime)
+        
 
-        const localTimeDate = localTime;
+        const localTimeDate = localTime.toDate();
 
         const hoursPassed = (currentDate - localTimeDate)/3600000 ; // Convert ms to hours
-        console.log(hoursPassed)
 
         if (hoursPassed < 0.04) {
-          document.getElementById("login").style.display = "none";
 
           return true;
         } else{  //3.75 minutes
             //showNotification(`OTP already sent. Try again in ${Math.ceil(0.0625 - hoursPassed)} hours.`);
-            return false; // Don't allow OTP request
+            return false; //allow OTP request
         }
 
   //return true; // Allow sendOTP() to run
 }
 
-var pass = "12345";
+let pass;
 let idx;
 function sendOTP() {
   if (phoneNumber.length !== 8) {
@@ -73,10 +70,11 @@ function sendOTP() {
               return;
           }else{
             querySnapshot.forEach((doc) => {
-              pass = doc.data().password; // Get the password field
+              pass = doc.data().password || "12345"// Get the password field
               lastOTPTime = doc.data().createdAt || Timestamp.fromDate(new Date(0)); // Default to old date if missing
               idx = doc.id;
               var c = canRequestOTP(lastOTPTime)
+
               if (c) {
                 showNotification("you are currently logged on another device!")
                 return;
@@ -111,17 +109,15 @@ function sendOTP() {
 
      // Create Firestore Timestamp
      var lastOTPDateLocallll = new Timestamp(seconds, nanoseconds);
-     lastOTPDateLocal = lastOTPDateLocallll.toDate()
-     console.log(lastOTPDateLocal)
+     lastOTPDateLocal = lastOTPDateLocallll   //.toDate()
 
  } else {
    lastOTPDateLocal = new Date(0)
  }
  var x = canRequestOTP(lastOTPDateLocal);
- console.log(x)
-//  if (x) {
-//    //document.getElementById("login").style.display = "none";
-//  } 
+ if (x) {
+   document.getElementById("login").style.display = "none";
+ } 
 
 // var resendOTPButton = document.getElementById("resendOTP")
 // resendOTPButton.addEventListener("click",(e)=>{
@@ -158,7 +154,6 @@ verifyOTPButton.addEventListener("click",(e)=>{
     const otpCode = document.getElementById("otpCode").value;
     // confirmationResult.confirm(otpCode)
     //     .then(result => {
-    console.log(pass)
     if (otpCode === pass&& pass === "12345"){
       document.getElementById("iform").style.display = "block";
     } else if (otpCode === pass && pass !== "12345") {
@@ -181,7 +176,6 @@ async  function recordTime() {
         }, { merge: true });
       }
       localStorage.setItem("lastOTPTime", timenow);
-      console.log(timenow)
       } catch (error) {
       console.error("Error resetting password: ", error);
   }
