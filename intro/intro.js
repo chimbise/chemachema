@@ -1,222 +1,222 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
-import { getAuth, signInWithPhoneNumber, RecaptchaVerifier } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
-import { getFirestore, collection,Timestamp, setDoc ,doc,getDoc, getDocs, query, where } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+// import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+// import { getAuth, signInWithPhoneNumber, RecaptchaVerifier } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+// import { getFirestore, collection,Timestamp, setDoc ,doc,getDoc, getDocs, query, where } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
 
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+// // TODO: Add SDKs for Firebase products that you want to use
+// // https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyCVeRF7CM52jidngi4AmMJJ6dnOMhgAxko",
-  authDomain: "calc-c6b1c.firebaseapp.com",
-  projectId: "calc-c6b1c",
-  storageBucket: "calc-c6b1c.firebasestorage.app",
-  messagingSenderId: "751714875802",
-  appId: "1:751714875802:web:9ffa30b7ee66579c686223",
-  measurementId: "G-L3XCXKVY8R"
-};
+// // Your web app's Firebase configuration
+// // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+// const firebaseConfig = {
+//   apiKey: "AIzaSyCVeRF7CM52jidngi4AmMJJ6dnOMhgAxko",
+//   authDomain: "calc-c6b1c.firebaseapp.com",
+//   projectId: "calc-c6b1c",
+//   storageBucket: "calc-c6b1c.firebasestorage.app",
+//   messagingSenderId: "751714875802",
+//   appId: "1:751714875802:web:9ffa30b7ee66579c686223",
+//   measurementId: "G-L3XCXKVY8R"
+// };
 
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(); // Firestore reference
-const usersRef = collection(db, "registered_users"); // Reference to collection
-
-var phoneNumber = "00";
-
-let lastOTPTime;
-
-function canRequestOTP(localTime) {
-
-        const currentTime = Timestamp.now();
-
-        // Convert Firestore Timestamps to JavaScript Date objects
-        
-        
-        //const lastOTPDate = lastOTPTime.toDate();
-        const currentDate = currentTime.toDate();
-        //console.log(lastOTPDate)
-        
-
-        const localTimeDate = localTime.toDate();
-
-        const hoursPassed = (currentDate - localTimeDate)/3600000 ; // Convert ms to hours
-
-        if (hoursPassed < 0.04) {
-
-          return true;
-        } else{  //3.75 minutes
-            //showNotification(`OTP already sent. Try again in ${Math.ceil(0.0625 - hoursPassed)} hours.`);
-            return false; //allow OTP request
-        }
-
-  //return true; // Allow sendOTP() to run
-}
-
-let pass;
-let idx;
-function sendOTP() {
-  if (phoneNumber.length !== 8) {
-    phoneNumber = document.getElementById("phoneNumber").value;
-  }
-  const phoneQuery = query(usersRef, where("phoneNumber", "==", phoneNumber)); 
-  getDocs(phoneQuery)
-      .then((querySnapshot) => {
-          if (querySnapshot.empty) {
-              showNotification("Entered nunmber is not registered, call/whatsapp 78282260 for registration")
-              sendOTPButton.disabled = false;
-              return;
-          }else{
-            querySnapshot.forEach((doc) => {
-              pass = doc.data().password || "12345"// Get the password field
-              lastOTPTime = doc.data().createdAt || Timestamp.fromDate(new Date(0)); // Default to old date if missing
-              idx = doc.id;
-              var c = canRequestOTP(lastOTPTime)
-
-              if (c) {
-                showNotification("you are currently logged on another device!")
-                return;
-                } 
-              document.getElementById("otpSection1").style.display = "none";
-              document.getElementById("otpSection").style.display = "flex";
-              });
-          }
-      })
-      .catch((error) => {
-        showNotification(error.message);
-        console.log(error.message)
-        sendOTPButton.disabled = false;
-      }); 
-}
-
- // Check locally stored OTP request time
-
- var b = localStorage.getItem("lastOTPTime");
-
- let lastOTPDateLocal; //= lastOTPLocal ? lastOTPLocal.toDate() : new Date(0);
-
- // Extract numbers using regex
- let match;
- if (b) {
-  match = b.match(/seconds=(\d+), nanoseconds=(\d+)/);
- }
-
- if (match) {
-     const seconds = parseInt(match[1], 10);
-     const nanoseconds = parseInt(match[2], 10);
-
-     // Create Firestore Timestamp
-     var lastOTPDateLocallll = new Timestamp(seconds, nanoseconds);
-     lastOTPDateLocal = lastOTPDateLocallll   //.toDate()
-
- } else {
-   lastOTPDateLocal = new Date(0)
- }
- var x = canRequestOTP(lastOTPDateLocal);
- if (x) {
-   document.getElementById("login").style.display = "none";
- } 
-
-// var resendOTPButton = document.getElementById("resendOTP")
-// resendOTPButton.addEventListener("click",(e)=>{
-//   sendOTP()
-//   resendOTPButton.style.display = 'none';
-// })
-// Initialize Firebase
-// const app = initializeApp(firebase);
+// // Initialize Firebase
+// const app = initializeApp(firebaseConfig);
 // const auth = getAuth(app);
+// const db = getFirestore(); // Firestore reference
+// const usersRef = collection(db, "registered_users"); // Reference to collection
 
-var sendOTPButton = document.getElementById("sendOTP")
-sendOTPButton.addEventListener("click",(e)=>{
-  sendOTP()
-})
-var registerButton = document.getElementById("register")
-registerButton.addEventListener("click",(e)=>{
-  showNotification('Call/whatsapp 78282260 for registration')
-})
-function showNotification(text) {
-  const notification = document.getElementById('notification');
-  notification.textContent = text;
-      notification.classList.add('show');
-  // Hide the notification after 3 seconds
-  setTimeout(() => {
-      notification.classList.remove('show');
-  }, 5000);
-}
-var verifyOTPButton = document.getElementById("verifyOTP")
-verifyOTPButton.addEventListener("click",(e)=>{
-  verifyOTP()
-})
-  function verifyOTP() {
-    //check password
-    const otpCode = document.getElementById("otpCode").value;
-    // confirmationResult.confirm(otpCode)
-    //     .then(result => {
-    if (otpCode === pass&& pass === "12345"){
-      document.getElementById("iform").style.display = "block";
-    } else if (otpCode === pass && pass !== "12345") {
-      document.getElementById("login").style.display = "none";
-      recordTime()
-    } else{
-      showNotification("incorrect passsword")
-    }
-  }
-async  function recordTime() {
-    try {
-      // Reference the document by ID
-      const userRef = doc(db, "registered_users", idx);          
-      // Get the document
-      const userSnap = await getDoc(userRef); 
-      var timenow = Timestamp.now(); 
-      if (userSnap.exists()) {
-          await setDoc(userRef, { 
-            createdAt:timenow
-        }, { merge: true });
-      }
-      localStorage.setItem("lastOTPTime", timenow);
-      } catch (error) {
-      console.error("Error resetting password: ", error);
-  }
-  }
-  const input = document.getElementById("digitInput");
-  const button = document.getElementById("submitBtn");
+// var phoneNumber = "00";
 
-  input.addEventListener("input", () => {
-      // Enable button only when exactly 5 digits are entered
-      button.disabled = input.value.length !== 5 || isNaN(input.value);
-  });
+// let lastOTPTime;
 
-  document.getElementById("digitForm").addEventListener("submit", function(event) {
-      event.preventDefault();
+// function canRequestOTP(localTime) {
 
-    resetPassword(idx,input.value)
-  });
+//         const currentTime = Timestamp.now();
 
-  async function resetPassword(userId, newPassword) {
-      try {
-          // Reference the document by ID
-          const userRef = doc(db, "registered_users", userId);          
-          // Get the document
-          const userSnap = await getDoc(userRef);  
-          if (userSnap.exists()) {
-              // Update the password field
-              await setDoc(userRef, { 
-                password: newPassword,
-                createdAt:new Timestamp(Timestamp.now().seconds - 3 * 60 * 60, Timestamp.now().nanoseconds)
-            }, { merge: true });
-              document.getElementById("iform").style.display = "none";
-              pass = newPassword;
-              showNotification("Password reset successfully!");
+//         // Convert Firestore Timestamps to JavaScript Date objects
+        
+        
+//         //const lastOTPDate = lastOTPTime.toDate();
+//         const currentDate = currentTime.toDate();
+//         //console.log(lastOTPDate)
+        
 
-          } else {
-              showNotification("User not found!");
-          }
-      } catch (error) {
-          console.error("Error resetting password: ", error);
-      }
-  }  
+//         const localTimeDate = localTime.toDate();
+
+//         const hoursPassed = (currentDate - localTimeDate)/3600000 ; // Convert ms to hours
+
+//         if (hoursPassed < 0.04) {
+
+//           return true;
+//         } else{  //3.75 minutes
+//             //showNotification(`OTP already sent. Try again in ${Math.ceil(0.0625 - hoursPassed)} hours.`);
+//             return false; //allow OTP request
+//         }
+
+//   //return true; // Allow sendOTP() to run
+// }
+
+// let pass;
+// let idx;
+// function sendOTP() {
+//   if (phoneNumber.length !== 8) {
+//     phoneNumber = document.getElementById("phoneNumber").value;
+//   }
+//   const phoneQuery = query(usersRef, where("phoneNumber", "==", phoneNumber)); 
+//   getDocs(phoneQuery)
+//       .then((querySnapshot) => {
+//           if (querySnapshot.empty) {
+//               showNotification("Entered nunmber is not registered, call/whatsapp 78282260 for registration")
+//               sendOTPButton.disabled = false;
+//               return;
+//           }else{
+//             querySnapshot.forEach((doc) => {
+//               pass = doc.data().password || "12345"// Get the password field
+//               lastOTPTime = doc.data().createdAt || Timestamp.fromDate(new Date(0)); // Default to old date if missing
+//               idx = doc.id;
+//               var c = canRequestOTP(lastOTPTime)
+
+//               if (c) {
+//                 showNotification("you are currently logged on another device!")
+//                 return;
+//                 } 
+//               document.getElementById("otpSection1").style.display = "none";
+//               document.getElementById("otpSection").style.display = "flex";
+//               });
+//           }
+//       })
+//       .catch((error) => {
+//         showNotification(error.message);
+//         console.log(error.message)
+//         sendOTPButton.disabled = false;
+//       }); 
+// }
+
+//  // Check locally stored OTP request time
+
+//  var b = localStorage.getItem("lastOTPTime");
+
+//  let lastOTPDateLocal; //= lastOTPLocal ? lastOTPLocal.toDate() : new Date(0);
+
+//  // Extract numbers using regex
+//  let match;
+//  if (b) {
+//   match = b.match(/seconds=(\d+), nanoseconds=(\d+)/);
+//  }
+
+//  if (match) {
+//      const seconds = parseInt(match[1], 10);
+//      const nanoseconds = parseInt(match[2], 10);
+
+//      // Create Firestore Timestamp
+//      var lastOTPDateLocallll = new Timestamp(seconds, nanoseconds);
+//      lastOTPDateLocal = lastOTPDateLocallll   //.toDate()
+
+//  } else {
+//    lastOTPDateLocal = new Date(0)
+//  }
+//  var x = canRequestOTP(lastOTPDateLocal);
+//  if (x) {
+//    document.getElementById("login").style.display = "none";
+//  } 
+
+// // var resendOTPButton = document.getElementById("resendOTP")
+// // resendOTPButton.addEventListener("click",(e)=>{
+// //   sendOTP()
+// //   resendOTPButton.style.display = 'none';
+// // })
+// // Initialize Firebase
+// // const app = initializeApp(firebase);
+// // const auth = getAuth(app);
+
+// var sendOTPButton = document.getElementById("sendOTP")
+// sendOTPButton.addEventListener("click",(e)=>{
+//   sendOTP()
+// })
+// var registerButton = document.getElementById("register")
+// registerButton.addEventListener("click",(e)=>{
+//   showNotification('Call/whatsapp 78282260 for registration')
+// })
+// function showNotification(text) {
+//   const notification = document.getElementById('notification');
+//   notification.textContent = text;
+//       notification.classList.add('show');
+//   // Hide the notification after 3 seconds
+//   setTimeout(() => {
+//       notification.classList.remove('show');
+//   }, 5000);
+// }
+// var verifyOTPButton = document.getElementById("verifyOTP")
+// verifyOTPButton.addEventListener("click",(e)=>{
+//   verifyOTP()
+// })
+//   function verifyOTP() {
+//     //check password
+//     const otpCode = document.getElementById("otpCode").value;
+//     // confirmationResult.confirm(otpCode)
+//     //     .then(result => {
+//     if (otpCode === pass&& pass === "12345"){
+//       document.getElementById("iform").style.display = "block";
+//     } else if (otpCode === pass && pass !== "12345") {
+//       document.getElementById("login").style.display = "none";
+//       recordTime()
+//     } else{
+//       showNotification("incorrect passsword")
+//     }
+//   }
+// async  function recordTime() {
+//     try {
+//       // Reference the document by ID
+//       const userRef = doc(db, "registered_users", idx);          
+//       // Get the document
+//       const userSnap = await getDoc(userRef); 
+//       var timenow = Timestamp.now(); 
+//       if (userSnap.exists()) {
+//           await setDoc(userRef, { 
+//             createdAt:timenow
+//         }, { merge: true });
+//       }
+//       localStorage.setItem("lastOTPTime", timenow);
+//       } catch (error) {
+//       console.error("Error resetting password: ", error);
+//   }
+//   }
+//   const input = document.getElementById("digitInput");
+//   const button = document.getElementById("submitBtn");
+
+//   input.addEventListener("input", () => {
+//       // Enable button only when exactly 5 digits are entered
+//       button.disabled = input.value.length !== 5 || isNaN(input.value);
+//   });
+
+//   document.getElementById("digitForm").addEventListener("submit", function(event) {
+//       event.preventDefault();
+
+//     resetPassword(idx,input.value)
+//   });
+
+//   async function resetPassword(userId, newPassword) {
+//       try {
+//           // Reference the document by ID
+//           const userRef = doc(db, "registered_users", userId);          
+//           // Get the document
+//           const userSnap = await getDoc(userRef);  
+//           if (userSnap.exists()) {
+//               // Update the password field
+//               await setDoc(userRef, { 
+//                 password: newPassword,
+//                 createdAt:new Timestamp(Timestamp.now().seconds - 3 * 60 * 60, Timestamp.now().nanoseconds)
+//             }, { merge: true });
+//               document.getElementById("iform").style.display = "none";
+//               pass = newPassword;
+//               showNotification("Password reset successfully!");
+
+//           } else {
+//               showNotification("User not found!");
+//           }
+//       } catch (error) {
+//           console.error("Error resetting password: ", error);
+//       }
+//   }  
 
 
 
