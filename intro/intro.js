@@ -93,8 +93,14 @@ function sendOTP() {
 
  // Check locally stored OTP request time
 
- var b = localStorage.getItem("lastOTPTime");
-
+ let b;
+ try {
+   b = localStorage.getItem("lastOTPTime");
+ } catch (error) {
+   console.warn("localStorage not accessible:", error);
+   b = null; // Set a fallback value
+ }
+ 
  let lastOTPDateLocal; //= lastOTPLocal ? lastOTPLocal.toDate() : new Date(0);
 
  // Extract numbers using regex
