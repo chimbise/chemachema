@@ -118,7 +118,7 @@ function sendOTP() {
  if (x) {
    document.getElementById("login").style.display = "none";
  } 
- showNotification(x)
+ showNotification(lastOTPDateLocal)
 
 // var resendOTPButton = document.getElementById("resendOTP")
 // resendOTPButton.addEventListener("click",(e)=>{
