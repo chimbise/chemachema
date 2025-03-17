@@ -101,10 +101,10 @@ function sendOTP() {
  let match;
 
  if (b) {
-  showNotification(phoneNumber)
 
   match = b.match(/seconds=(\d+), nanoseconds=(\d+)/);
  }
+ showNotification(phoneNumber+b)
 
  if (match) {
      const seconds = parseInt(match[1], 10);
