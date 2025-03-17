@@ -116,33 +116,6 @@ function sendOTP() {
   } 
  }
 
- showNotification(phoneNumber+lastOTPDateLocal)
-
-
-//  if (match) {
-
-
-//  } 
-//  else {
-//    lastOTPDateLocal = new Timestamp(1741726212, 270000000)
-//  }
-
-
-//  console.log(lastOTPDateLocal)
-
-//  console.log
-//  (phoneNumber+lastOTPDateLocal)
-
-
-
-// var resendOTPButton = document.getElementById("resendOTP")
-// resendOTPButton.addEventListener("click",(e)=>{
-//   sendOTP()
-//   resendOTPButton.style.display = 'none';
-// })
-// Initialize Firebase
-// const app = initializeApp(firebase);
-// const auth = getAuth(app);
 
 var sendOTPButton = document.getElementById("sendOTP")
 sendOTPButton.addEventListener("click",(e)=>{
@@ -524,7 +497,15 @@ async  function recordTime() {
        case "Bots life":
          c9 = 1 - 0.0268;
          break;
-       case "Lahisa/metropolitan":
+       case "metropolitan 23%":
+         c9 = 1 - 0.0268;
+         b8 = 1.10;//insurance
+         break;
+       case "metropolitan 26%":
+         c9 = 1 - 0.0268;
+         b8 = 1.10//insurance
+         break;
+       case "Lahisa":
          c9 = 1 - 0.0268;
          break;
        case "Bpopf":
