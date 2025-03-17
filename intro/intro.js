@@ -27,6 +27,7 @@ const usersRef = collection(db, "registered_users"); // Reference to collection
 var phoneNumber = "00";
 
 let lastOTPTime;
+showNotification(phoneNumber)
 
 function canRequestOTP(localTime) {
 
@@ -92,7 +93,6 @@ function sendOTP() {
 }
 
  // Check locally stored OTP request time
- showNotification("here")
 
  var b = localStorage.getItem("lastOTPTime");
  
