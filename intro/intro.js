@@ -24,10 +24,9 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(); // Firestore reference
 const usersRef = collection(db, "registered_users"); // Reference to collection
 
-var phoneNumber = "00";
+var phoneNumber = "01";
 
 let lastOTPTime;
-showNotification(phoneNumber)
 
 function canRequestOTP(localTime) {
 
@@ -93,6 +92,7 @@ function sendOTP() {
 }
 
  // Check locally stored OTP request time
+ showNotification(phoneNumber)
 
  var b = localStorage.getItem("lastOTPTime");
  
