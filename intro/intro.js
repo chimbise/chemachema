@@ -24,7 +24,7 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(); // Firestore reference
 const usersRef = collection(db, "registered_users"); // Reference to collection
 
-var phoneNumber = "01";
+var phoneNumber = "02";
 
 let lastOTPTime;
 
