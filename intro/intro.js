@@ -93,7 +93,6 @@ function sendOTP() {
 
  // Check locally stored OTP request time
  var b = localStorage.getItem("lastOTPTime");
- showNotification(b)
  
  let lastOTPDateLocal; //= lastOTPLocal ? lastOTPLocal.toDate() : new Date(0);
 
@@ -119,6 +118,7 @@ function sendOTP() {
  if (x) {
    document.getElementById("login").style.display = "none";
  } 
+ showNotification(x)
 
 // var resendOTPButton = document.getElementById("resendOTP")
 // resendOTPButton.addEventListener("click",(e)=>{
