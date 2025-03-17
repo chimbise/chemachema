@@ -99,9 +99,9 @@ function sendOTP() {
 
  // Extract numbers using regex
  let match;
- showNotification(phoneNumber)
 
  if (b) {
+  showNotification(phoneNumber)
 
   match = b.match(/seconds=(\d+), nanoseconds=(\d+)/);
  }
