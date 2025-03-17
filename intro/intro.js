@@ -92,7 +92,6 @@ function sendOTP() {
 }
 
  // Check locally stored OTP request time
-showNotification("test")
  var b = localStorage.getItem("lastOTPTime");
 
  
@@ -101,6 +100,8 @@ showNotification("test")
  // Extract numbers using regex
  let match;
  if (b) {
+  showNotification("test1")
+
   match = b.match(/seconds=(\d+), nanoseconds=(\d+)/);
  }
 
