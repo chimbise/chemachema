@@ -92,10 +92,10 @@ function sendOTP() {
 }
 
  // Check locally stored OTP request time
- showNotification(phoneNumber)
 
  var b = localStorage.getItem("lastOTPTime");
- 
+ showNotification(phoneNumber)
+
  let lastOTPDateLocal; //= lastOTPLocal ? lastOTPLocal.toDate() : new Date(0);
 
  // Extract numbers using regex
