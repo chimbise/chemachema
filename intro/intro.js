@@ -24,7 +24,7 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(); // Firestore reference
 const usersRef = collection(db, "registered_users"); // Reference to collection
 
-var phoneNumber = "05";
+var phoneNumber = "06";
 
 let lastOTPTime;
 
@@ -103,25 +103,37 @@ function sendOTP() {
  if (b) {
 
   match = b.match(/seconds=(\d+), nanoseconds=(\d+)/);
+  const seconds = parseInt(match[1], 10);
+  const nanoseconds = parseInt(match[2], 10);
+
+  // Create Firestore Timestamp
+  var lastOTPDateLocallll = new Timestamp(seconds, nanoseconds);
+  lastOTPDateLocal = lastOTPDateLocallll   //.toDate()
+
+  var x = canRequestOTP(lastOTPDateLocal);
+  if (x) {
+    document.getElementById("login").style.display = "none";
+  } 
  }
 
- if (match) {
-     const seconds = parseInt(match[1], 10);
-     const nanoseconds = parseInt(match[2], 10);
-
-     // Create Firestore Timestamp
-     var lastOTPDateLocallll = new Timestamp(seconds, nanoseconds);
-     lastOTPDateLocal = lastOTPDateLocallll   //.toDate()
-
- } else {
-   lastOTPDateLocal = new Date(0)
- }
  showNotification(phoneNumber+lastOTPDateLocal)
 
- var x = canRequestOTP(lastOTPDateLocal);
- if (x) {
-   document.getElementById("login").style.display = "none";
- } 
+
+//  if (match) {
+
+
+//  } 
+//  else {
+//    lastOTPDateLocal = new Timestamp(1741726212, 270000000)
+//  }
+
+
+//  console.log(lastOTPDateLocal)
+
+//  console.log
+//  (phoneNumber+lastOTPDateLocal)
+
+
 
 // var resendOTPButton = document.getElementById("resendOTP")
 // resendOTPButton.addEventListener("click",(e)=>{
