@@ -20,7 +20,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+//const auth = getAuth(app);
 const db = getFirestore(); // Firestore reference
 const usersRef = collection(db, "registered_users"); // Reference to collection
 
@@ -92,14 +92,9 @@ function sendOTP() {
 }
 
  // Check locally stored OTP request time
+showNotification("test")
+ var b = localStorage.getItem("lastOTPTime");
 
- let b;
- try {
-   b = localStorage.getItem("lastOTPTime");
- } catch (error) {
-  showNotification("localStorage not accessible:"+ error);
-   b = null; // Set a fallback value
- }
  
  let lastOTPDateLocal; //= lastOTPLocal ? lastOTPLocal.toDate() : new Date(0);
 
