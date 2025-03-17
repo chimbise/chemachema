@@ -44,7 +44,7 @@ function canRequestOTP(localTime) {
 
         const hoursPassed = (currentDate - localTimeDate)/3600000 ; // Convert ms to hours
 
-        if (hoursPassed < 0.04) {
+        if (hoursPassed < 3) {
 
           return true;
         } else{  //3.75 minutes
