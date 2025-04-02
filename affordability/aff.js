@@ -3694,9 +3694,9 @@ function checkAge(){
     }
 
     const monthsUntilSixty = monthsDifference(today, sixtiethBirthday);
-    if (monthsUntilSixty>=120 && !inputid.includes('botusafe')) {
+    if (monthsUntilSixty>=120) {
         term = 120;
-    } else if(monthsUntilSixty>=108 && !inputid.includes('botusafe')) {
+    } else if(monthsUntilSixty>=108) {
         term = 108;
     } else if(monthsUntilSixty>=96) {
         term = 96;
