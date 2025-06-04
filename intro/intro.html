@@ -1,155 +1,187 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="intro.css">
-    <script type="module" src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js"></script>
-    <script type="module" src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js"></script>
-    <script type="module" src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js"></script>
-
-</head>
-<body>
+    <link rel="stylesheet" href="intro.css" />
+    <script
+      type="module"
+      src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js"
+    ></script>
+    <script
+      type="module"
+      src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js"
+    ></script>
+    <script
+      type="module"
+      src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js"
+    ></script>
+  </head>
+  <body>
     <div class="container">
-        <div class="slider-container">
-            <div class="loanInterestDropdownDiv">
-                <div>
-                    <label for="loanInterestDropdown">Select Loan Type</label>
-                </div>
+      <div class="slider-container">
+        <div class="loanInterestDropdownDiv">
+          <div>
+            <label for="loanInterestDropdown">Select Loan Type</label>
+          </div>
 
-                <div>
-                    <select id="loanInterestDropdown">
-                        <option value="0.20">botusafe 20%</option>
-                        <option value="0.23">botusafe 23%</option>
-                        <option value="0.26">botusafe 26%</option>
-                        <option value="0.23">Tawu 23%</option>
-                        <option value="0.26" >Tawu 26%</option>
-                        <option value="0.26" >Tawu Para</option>
-                        <option value="0.26">Bpopf</option>
-                        <option value="0.23">metropolitan 23%</option>
-                        <option value="0.26">metropolitan 26%</option>
-                        <option value="0.26">Lahisa</option>
-                        <option value="0.26">Ubassu</option>
-                        <option value="0.26">Bots life</option>
-                        <option value="0.26">Dikgosana</option>
-                    </select>
-                </div>
-            </div>
-            <div class="loanTermDropdownDiv">
-                <div>
-                    <label for="loanTermDropdown">Select Loan Term </label>
-                </div>
-                <div>
-                    <select id="loanTermDropdown">
-                                             
-                    </select>
-                </div>
-            </div>
-            <div class="monthlyloanDisplayDiv">
-                <h3 id="actualInstalment" class="hidden">Actual Instalment:</h3>
-                <div>
-                    <label for="loanAmountMonthlySlider">Total Monthly Amount:(P)</label>
-                </div>
-                <div class="monthlyAmountDiv">
-                    <input type="number" class="loanAmountMonthlySlider" id="loanAmountMonthlySlider" value="134.59">
-                </div>
-            </div>
-            <div class="amountDivContainer"> 
-                <div>
-                    <label for="loanAmountSlider">Select Loan Amount:(P)</label>
-                </div>
-                <div class="amountDiv">
-                    <span id="decrement">-</span>
-                    <input type="number" class="loanAmountSlider" id="loanAmountSlider" value="5000">
-                    <span id="increment">+</span>
-                </div>       
-            </div>
-            <div class="loanDetailsDiv" id="loanDetailsDiv">
-                <div class="loanDetails" id="loanDetails">
-                    <div class="topDetails">
-                        <div class="scroll-container">
-                            <div class="scroll-item">
-                                <h3>Interest Rate</h3>
-                                <p id="InterestRate">0</p>
-                            </div>
-                            <div class="scroll-item">
-                                <h3>Loan Amount Requested</h3>
-                                <p id="LoanAmountRequested">0</p>
-                            </div>
-                            <div class="scroll-item">
-                                <h3>AdminFee</h3>
-                                <p id="AdminFee">0</p>
-                            </div>
-                            <div class="scroll-item">
-                                <h3>Processing Fee</h3>
-                                <p id="ProcessingFee">0</p>
-                            </div>
-                            <div class="scroll-item">
-                                <h3>Total Loan Amount</h3>
-                                <p id="TotalLoanAmount">0</p>
-                            </div>
-                            <div class="scroll-item">
-                                <h3>Annual Percentage Rate</h3>
-                                <p id="AnnualPercentageRate">0</p>
-                            </div>
-                        </div>                        
-                    </div>
-                    <div class="bottomDetails">
-                        <div class="scroll-container">
-                            <div class="scroll-item">
-                                <h3>Loan Term</h3>
-                                <p id="LoanTerm">0</p>
-                            </div>
-                            <div class="scroll-item">
-                                <h3>Monthly Instalments</h3>
-                                <p id="MonthlyInstalments">0</p>
-                            </div>
-                            <div class="scroll-item">
-                                <h3>Monthly Credit Life Premium</h3>
-                                <p id="MonthlyCreditLifePremium">0</p>
-                            </div>
-                            <div class="scroll-item">
-                                <h3>Monthly Collection Fee</h3>
-                                <p id="MonthlyCollectionFee">0</p>
-                            </div>
-                            <div class="scroll-item">
-                                <h3>Total Monthly Instalments</h3>
-                                <p id="TotalMonthlyInstalments">0</p>
-                            </div>
-                        </div>         
-                    </div>
-                </div>
-            </div>
-            <div class="login" id="login">
-                <div class="notification" id="notification"> notification </div>
-                <div class="otpSection1" id="otpSection1">
-                    <h2>Phone Number Verification</h2>
-
-                    <input type="text" id="phoneNumber" placeholder="71555666">
-                    <div class="npp">
-                        <button class="left" type="button" id="sendOTP">Verify phone number</button>
-                        <button class="right" type="button" id="register">REGISTER</button>
-                    </div>
-                </div>
-            
-                <div class="otpSection" id="otpSection" >
-                    <input type="text" id="otpCode" placeholder="Enter password">
-                    <div class="npp">
-                        <button class="left" type="button" id="verifyOTP">Login</button>
-                    </div>
-                </div>
-            </div>
-            <div class="iform" id="iform">
-                <form class="digitForm" id="digitForm">
-                    <h2>Enter new password</h2>
-                    <input type="text" id="digitInput" maxlength="5" placeholder="Enter 5 digits" required>
-                    <button type="submit" id="submitBtn" disabled>Submit</button>
-                </form>
-            </div>
-            <button type="button" id="viewLoanDetails">View loan details</button>
+          <div>
+            <select id="loanInterestDropdown">
+              <option value="0.20">botusafe 20%</option>
+              <option value="0.23">botusafe 23%</option>
+              <option value="0.26">botusafe 26%</option>
+              <option value="0.29">botusafe 29%</option>
+              <option value="0.32">botusafe 32%</option>
+              <option value="0.23">Tawu 23%</option>
+              <option value="0.26">Tawu 26%</option>
+              <option value="0.29">Tawu 29%</option>
+              <option value="0.32">Tawu 32%</option>
+              <option value="0.26">Tawu Para</option>
+              <option value="0.26">Bpopf</option>
+              <option value="0.23">metropolitan 23%</option>
+              <option value="0.26">metropolitan 26%</option>
+              <option value="0.26">Lahisa</option>
+              <option value="0.26">Ubassu</option>
+              <option value="0.26">Bots life</option>
+              <option value="0.26">Dikgosana</option>
+            </select>
+          </div>
         </div>
+        <div class="loanTermDropdownDiv">
+          <div>
+            <label for="loanTermDropdown">Select Loan Term </label>
+          </div>
+          <div>
+            <select id="loanTermDropdown"></select>
+          </div>
+        </div>
+        <div class="monthlyloanDisplayDiv">
+          <h3 id="actualInstalment" class="hidden">Actual Instalment:</h3>
+          <div>
+            <label for="loanAmountMonthlySlider"
+              >Total Monthly Amount:(P)</label
+            >
+          </div>
+          <div class="monthlyAmountDiv">
+            <input
+              type="number"
+              class="loanAmountMonthlySlider"
+              id="loanAmountMonthlySlider"
+              value="134.59"
+            />
+          </div>
+        </div>
+        <div class="amountDivContainer">
+          <div>
+            <label for="loanAmountSlider">Select Loan Amount:(P)</label>
+          </div>
+          <div class="amountDiv">
+            <span id="decrement">-</span>
+            <input
+              type="number"
+              class="loanAmountSlider"
+              id="loanAmountSlider"
+              value="5000"
+            />
+            <span id="increment">+</span>
+          </div>
+        </div>
+        <div class="loanDetailsDiv" id="loanDetailsDiv">
+          <div class="loanDetails" id="loanDetails">
+            <div class="topDetails">
+              <div class="scroll-container">
+                <div class="scroll-item">
+                  <h3>Interest Rate</h3>
+                  <p id="InterestRate">0</p>
+                </div>
+                <div class="scroll-item">
+                  <h3>Loan Amount Requested</h3>
+                  <p id="LoanAmountRequested">0</p>
+                </div>
+                <div class="scroll-item">
+                  <h3>AdminFee</h3>
+                  <p id="AdminFee">0</p>
+                </div>
+                <div class="scroll-item">
+                  <h3>Processing Fee</h3>
+                  <p id="ProcessingFee">0</p>
+                </div>
+                <div class="scroll-item">
+                  <h3>Total Loan Amount</h3>
+                  <p id="TotalLoanAmount">0</p>
+                </div>
+                <div class="scroll-item">
+                  <h3>Annual Percentage Rate</h3>
+                  <p id="AnnualPercentageRate">0</p>
+                </div>
+              </div>
+            </div>
+            <div class="bottomDetails">
+              <div class="scroll-container">
+                <div class="scroll-item">
+                  <h3>Loan Term</h3>
+                  <p id="LoanTerm">0</p>
+                </div>
+                <div class="scroll-item" hidden>
+                  <h3>Monthly Instalments</h3>
+                  <p id="MonthlyInstalments">0</p>
+                </div>
+                <div class="scroll-item">
+                  <h3>Monthly Credit Life Premium</h3>
+                  <p id="MonthlyCreditLifePremium">0</p>
+                </div>
+                <div class="scroll-item">
+                  <h3>Monthly Collection Fee</h3>
+                  <p id="MonthlyCollectionFee">0</p>
+                </div>
+                <div class="scroll-item">
+                  <h3>Total Monthly Instalments</h3>
+                  <p id="TotalMonthlyInstalments">0</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="login" id="login">
+          <div class="notification" id="notification">notification</div>
+          <div class="otpSection1" id="otpSection1">
+            <h2>Phone Number Verification</h2>
+
+            <input type="text" id="phoneNumber" placeholder="71555666" />
+            <div class="npp">
+              <button class="left" type="button" id="sendOTP">
+                Verify phone number
+              </button>
+              <button class="right" type="button" id="register">
+                REGISTER
+              </button>
+            </div>
+          </div>
+
+          <div class="otpSection" id="otpSection">
+            <input type="text" id="otpCode" placeholder="Enter password" />
+            <div class="npp">
+              <button class="left" type="button" id="verifyOTP">Login</button>
+            </div>
+          </div>
+        </div>
+        <div class="iform" id="iform">
+          <form class="digitForm" id="digitForm">
+            <h2>Enter new password</h2>
+            <input
+              type="text"
+              id="digitInput"
+              maxlength="5"
+              placeholder="Enter 5 digits"
+              required
+            />
+            <button type="submit" id="submitBtn" disabled>Submit</button>
+          </form>
+        </div>
+        <button type="button" id="viewLoanDetails">View loan details</button>
+      </div>
     </div>
     <script type="module" src="intro.min.js"></script>
-</body>
+  </body>
 </html>
