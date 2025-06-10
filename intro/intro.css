@@ -1,289 +1,292 @@
-
 body {
-    margin: 5px;
-    background-color: rgb(255, 236, 224);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  margin: 5px;
+  background-color: rgb(255, 236, 224);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .slider-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: linear-gradient(135deg,rgb(91, 91, 255), rgb(170, 170, 255)); /* Gradient background */
-    border-radius: 10px;
-    padding: 5px;
-    width: 95%; /* Default width for small screens (phones) */
-    height: 95%;
-    font-size: larger;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: linear-gradient(
+    135deg,
+    rgb(91, 91, 255),
+    rgb(170, 170, 255)
+  ); /* Gradient background */
+  border-radius: 10px;
+  padding: 5px;
+  width: 95%; /* Default width for small screens (phones) */
+  height: 95%;
+  font-size: larger;
 }
 
 @media (min-width: 600px) {
-    .slider-container {
-        width: 85%; /* Width for tablets and larger devices */
-        height: 85%;
-    }
+  .slider-container {
+    width: 85%; /* Width for tablets and larger devices */
+    height: 85%;
+  }
 }
 
 @media (min-width: 1024px) {
-    .slider-container {
-        width: 70%; /* Width for desktop computers and larger devices */
-        height: 70%;
-    }
+  .slider-container {
+    width: 70%; /* Width for desktop computers and larger devices */
+    height: 70%;
+  }
 }
 .amountDiv {
-    display: flex;
-    
+  display: flex;
 }
 .monthlyAmountDiv {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
-#actualInstalment.hidden{
-    visibility: hidden;
-    padding: 0px;
-    margin: 0px;
+#actualInstalment.hidden {
+  visibility: hidden;
+  padding: 0px;
+  margin: 0px;
 }
 .slider-container span {
-    border: 2px solid  rgb(107, 255, 107); /* You can adjust the border thickness and color */
-    background-color: #6bff6b;
-    cursor: pointer;
-    width: 40px;
-    height: 40px; /* Add height to ensure it's a square */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center; /* Ensures text inside the span is centered */
-    border-radius: 5px;
-
+  border: 2px solid rgb(107, 255, 107); /* You can adjust the border thickness and color */
+  background-color: #6bff6b;
+  cursor: pointer;
+  width: 40px;
+  height: 40px; /* Add height to ensure it's a square */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center; /* Ensures text inside the span is centered */
+  border-radius: 5px;
 }
 .loanInterestDropdownDiv {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    align-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+}
 
+optgroup option {
+  display: block;
 }
 
 .loanTermDropdownDiv {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    align-content: center;
-
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
 }
 .monthlyloanDisplayDiv {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    align-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
 }
 .amountDivContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    align-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
 }
 #loanInterestDropdown {
-    height: 50px;
-    border-radius: 5px;
-    font-size: larger;
+  height: 50px;
+  border-radius: 5px;
+  font-size: larger;
 }
 #loanTermDropdown {
-    height: 50px;
-    border-radius: 5px;
-    font-size: larger;
+  height: 50px;
+  border-radius: 5px;
+  font-size: larger;
 }
 .slider-container input {
-    text-align: center;
-    height: 40px;
-    margin-left: 5px;
-    margin-right: 5px;
-    border-radius: 5px;
-    width: 200px;
-    font-size: xx-large;
+  text-align: center;
+  height: 40px;
+  margin-left: 5px;
+  margin-right: 5px;
+  border-radius: 5px;
+  width: 200px;
+  font-size: xx-large;
 }
 .loanAmountSlider::-webkit-outer-spin-button,
 .loanAmountMonthlySlider::-webkit-outer-spin-button,
 .loanAmountMonthlySlider::-webkit-inner-spin-button,
 .loanAmountSlider::-webkit-inner-spin-button {
-    display: none;
+  display: none;
 }
-.loanAmountMonthlySlider{
-    background-color: #f0f0f0;
-    font-weight: bolder;
+.loanAmountMonthlySlider {
+  background-color: #f0f0f0;
+  font-weight: bolder;
 }
 .loanDetails {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    width: 100%;
-    height: 50%;
-    background-color:  rgb(107, 255, 107)
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 100%;
+  height: 50%;
+  background-color: rgb(107, 255, 107);
 }
 
 .loanDetailsDiv {
-    display: none; /* Hide default arrows in Chrome, Safari, Edge */
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width:100% ;
-    height:100%;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(0, 0, 0, 0.603);
+  display: none; /* Hide default arrows in Chrome, Safari, Edge */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.603);
 }
-#viewLoanDetails{
-    background-color: rgb(107, 255, 107);
-    border-radius: 5px;
-    padding: 10px;
-    font-size: larger;
+#viewLoanDetails {
+  background-color: rgb(107, 255, 107);
+  border-radius: 5px;
+  padding: 10px;
+  font-size: larger;
 }
 
-.topDetails{
-    width: 100%;
-    overflow-x: auto;
+.topDetails {
+  width: 100%;
+  overflow-x: auto;
 }
 .scroll-container {
-    display: flex;
-    flex-wrap: nowrap;
+  display: flex;
+  flex-wrap: nowrap;
 }
-.bottomDetails{
-    width: 100%;
-    overflow-x: auto;
+.bottomDetails {
+  width: 100%;
+  overflow-x: auto;
 }
 .scroll-item {
-    min-width: 200px;
-    margin: 10px;
-    background-color: #f0f0f0;
-    border: 1px solid black;
-    text-align: center;
-    font-weight: bold;  /* Make text bold */
-    font-size: large;
-    flex: 0 0 auto;
-    border-radius: 5px;
+  min-width: 200px;
+  margin: 10px;
+  background-color: #f0f0f0;
+  border: 1px solid black;
+  text-align: center;
+  font-weight: bold; /* Make text bold */
+  font-size: large;
+  flex: 0 0 auto;
+  border-radius: 5px;
 }
 
 .login {
-    display:block;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width:100% ;
-    height:100%;
-    border-radius: 10px;
-    background-color: rgba(0, 0, 0, 0.952);
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.952);
 }
 
 div.otpSection1 h2 {
-    color: aliceblue;
+  color: aliceblue;
 }
 
-.otpSection1{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 50px;
+.otpSection1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
 }
 
-.otpSection{
-    display: none;
-    align-items: center;
-    flex-direction: column;
-    margin-top: 50px;
+.otpSection {
+  display: none;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 50px;
 }
 
-.right:hover{
-    text-decoration: underline;
-    cursor:grab
+.right:hover {
+  text-decoration: underline;
+  cursor: grab;
 }
-.left:hover{
-    background-color: darkgray;
-    cursor:grab
+.left:hover {
+  background-color: darkgray;
+  cursor: grab;
 }
 
-.right{
-    background-color: #6bff6b00;
-    border: 0px;
-    color: red;
-    margin-left: 5px;
+.right {
+  background-color: #6bff6b00;
+  border: 0px;
+  color: red;
+  margin-left: 5px;
 }
-.left{
-    margin-left: 5px;
-    border: 0px;
+.left {
+  margin-left: 5px;
+  border: 0px;
 }
-.npp{
-    margin: 15px;
+.npp {
+  margin: 15px;
 }
-.notification{
-    position: absolute;
-    top: 13%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: large;
-    background-color: yellow; /* Green background */
-    color: red;
-    padding: 16px;
-    border-radius: 5px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    transition: opacity 0.5s ease; /* Animate opacity */
-    opacity: 0;
-    visibility: hidden; /* Hidden by default */
+.notification {
+  position: absolute;
+  top: 13%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: large;
+  background-color: yellow; /* Green background */
+  color: red;
+  padding: 16px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  transition: opacity 0.5s ease; /* Animate opacity */
+  opacity: 0;
+  visibility: hidden; /* Hidden by default */
 }
 /* Show the notification */
 .notification.show {
-    visibility: visible;
-    opacity: 1;
+  visibility: visible;
+  opacity: 1;
 }
 
 .iform {
-    display:none;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width:100% ;
-    height:100%;
-    border-radius: 10px;
-    background-color: rgba(0, 0, 0, 0.952);
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.952);
 }
 
 .digitForm {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 .digitForm input {
-    width: 50%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-    text-align: center;
+  width: 50%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  text-align: center;
 }
 .digitForm button {
-    width: 50%;
-    padding: 10px;
-    background: #28a745;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+  width: 50%;
+  padding: 10px;
+  background: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 button:disabled {
-    background: gray;
-    cursor: not-allowed;
+  background: gray;
+  cursor: not-allowed;
 }
