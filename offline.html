@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#1478ff" />
+    <title>ChemaChema Offline</title>
+    <style>
+      :root {
+        color-scheme: light;
+      }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: "Segoe UI", Tahoma, sans-serif;
+        background: linear-gradient(145deg, #edf3fb, #dbe8f8);
+        color: #11233c;
+        display: grid;
+        place-items: center;
+        padding: 24px;
+        box-sizing: border-box;
+      }
+      main {
+        width: min(520px, 100%);
+        padding: 24px;
+        border: 1px solid rgba(17, 35, 60, 0.15);
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.9);
+        box-shadow: 0 20px 40px rgba(17, 35, 60, 0.15);
+      }
+      h1 {
+        margin: 0 0 10px;
+        font-size: 1.45rem;
+      }
+      p {
+        margin: 0 0 14px;
+        line-height: 1.45;
+      }
+      nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      a {
+        display: inline-block;
+        padding: 10px 14px;
+        border-radius: 10px;
+        text-decoration: none;
+        color: #fff;
+        background: linear-gradient(160deg, #1478ff, #0b57d0);
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>You're Offline</h1>
+      <p>
+        No internet connection is available right now. If the page was loaded
+        before, cached screens and files are still available.
+      </p>
+      <nav>
+        <a href="./intro/intro.html">Loan Calculator</a>
+        <a href="./affordability/aff.html">Affordability</a>
+      </nav>
+    </main>
+  </body>
+</html>

@@ -1,292 +1,442 @@
+﻿@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap");
+
+:root {
+  --bg-start: #f4efe7;
+  --bg-end: #c9def5;
+  --panel: rgba(255, 255, 255, 0.88);
+  --panel-border: rgba(15, 35, 66, 0.1);
+  --text: #11233c;
+  --muted: #557091;
+  --accent: #1478ff;
+  --accent-strong: #0b57d0;
+  --positive: #1e9f61;
+  --danger: #ce2f43;
+  --shadow: 0 24px 55px rgba(15, 35, 66, 0.2);
+}
+
+* {
+  box-sizing: border-box;
+}
+
 body {
-  margin: 5px;
-  background-color: rgb(255, 236, 224);
+  margin: 0;
+  min-height: 100vh;
+  padding: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
+  font-family: "Manrope", "Segoe UI", sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(
+      circle at 20% 20%,
+      rgba(20, 120, 255, 0.18),
+      transparent 42%
+    ),
+    radial-gradient(circle at 85% 15%, rgba(30, 159, 97, 0.2), transparent 40%),
+    linear-gradient(145deg, var(--bg-start), var(--bg-end));
+}
+
+.container {
+  width: min(980px, 100%);
 }
 
 .slider-container {
+  position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: flex-start;
   align-items: center;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: linear-gradient(
-    135deg,
-    rgb(91, 91, 255),
-    rgb(170, 170, 255)
-  ); /* Gradient background */
-  border-radius: 10px;
-  padding: 5px;
-  width: 95%; /* Default width for small screens (phones) */
-  height: 95%;
-  font-size: larger;
+  gap: 16px;
+  width: 100%;
+  min-height: calc(100vh - 40px);
+  padding: 26px;
+  border: 1px solid var(--panel-border);
+  border-radius: 26px;
+  background: var(--panel);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(8px);
 }
 
-@media (min-width: 600px) {
+@media (min-width: 900px) {
   .slider-container {
-    width: 85%; /* Width for tablets and larger devices */
-    height: 85%;
+    min-height: 780px;
   }
 }
 
-@media (min-width: 1024px) {
-  .slider-container {
-    width: 70%; /* Width for desktop computers and larger devices */
-    height: 70%;
-  }
-}
-.amountDiv {
-  display: flex;
-}
-.monthlyAmountDiv {
+.loanInterestDropdownDiv,
+.loanTermDropdownDiv,
+.monthlyloanDisplayDiv,
+.amountDivContainer {
+  width: min(520px, 100%);
   display: flex;
   flex-direction: column;
+  align-items: center;
+  gap: 8px;
 }
-#actualInstalment.hidden {
-  visibility: hidden;
-  padding: 0px;
-  margin: 0px;
-}
-.slider-container span {
-  border: 2px solid rgb(107, 255, 107); /* You can adjust the border thickness and color */
-  background-color: #6bff6b;
-  cursor: pointer;
-  width: 40px;
-  height: 40px; /* Add height to ensure it's a square */
+
+.monthlyAmountDiv,
+.amountDiv {
   display: flex;
   justify-content: center;
   align-items: center;
-  text-align: center; /* Ensures text inside the span is centered */
-  border-radius: 5px;
-}
-.loanInterestDropdownDiv {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  align-content: center;
+  gap: 8px;
+  width: 100%;
 }
 
-optgroup option {
-  display: block;
+label {
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--muted);
+  text-transform: uppercase;
 }
 
-.loanTermDropdownDiv {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  align-content: center;
-}
-.monthlyloanDisplayDiv {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  align-content: center;
-}
-.amountDivContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  align-content: center;
-}
-#loanInterestDropdown {
-  height: 50px;
-  border-radius: 5px;
-  font-size: larger;
-}
+#loanInterestDropdown,
 #loanTermDropdown {
-  height: 50px;
-  border-radius: 5px;
-  font-size: larger;
+  width: min(360px, 100%);
+  height: 48px;
+  border: 1px solid rgba(17, 35, 60, 0.2);
+  border-radius: 12px;
+  padding: 0 12px;
+  font: inherit;
+  font-size: 1rem;
+  color: var(--text);
+  background: #f8fbff;
+  outline: none;
 }
+
+#loanInterestDropdown:focus,
+#loanTermDropdown:focus,
+.slider-container input:focus,
+#phoneNumber:focus,
+#otpCode:focus,
+#digitInput:focus {
+  border-color: rgba(20, 120, 255, 0.65);
+  box-shadow: 0 0 0 3px rgba(20, 120, 255, 0.18);
+}
+
 .slider-container input {
+  width: min(270px, 100%);
+  height: 50px;
+  padding: 0 12px;
+  margin: 0;
+  border: 1px solid rgba(17, 35, 60, 0.2);
+  border-radius: 12px;
   text-align: center;
-  height: 40px;
-  margin-left: 5px;
-  margin-right: 5px;
-  border-radius: 5px;
-  width: 200px;
-  font-size: xx-large;
+  font-family: inherit;
+  font-size: clamp(1rem, 1.9vw, 1.5rem);
+  font-weight: 600;
+  color: var(--text);
+  background: #ffffff;
+  outline: none;
+  transition:
+    border-color 140ms ease,
+    box-shadow 140ms ease;
 }
+
 .loanAmountSlider::-webkit-outer-spin-button,
 .loanAmountMonthlySlider::-webkit-outer-spin-button,
 .loanAmountMonthlySlider::-webkit-inner-spin-button,
 .loanAmountSlider::-webkit-inner-spin-button {
   display: none;
 }
+
 .loanAmountMonthlySlider {
-  background-color: #f0f0f0;
-  font-weight: bolder;
+  background: #edf5ff;
 }
-.loanDetails {
+
+#decrement,
+#increment {
+  width: 46px;
+  height: 46px;
+  border: 0;
+  border-radius: 12px;
+  cursor: pointer;
+  color: #fff;
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1;
   display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  width: 100%;
-  height: 50%;
-  background-color: rgb(107, 255, 107);
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(160deg, var(--accent), var(--accent-strong));
+  box-shadow: 0 10px 20px rgba(11, 87, 208, 0.35);
+  user-select: none;
+  transition:
+    transform 140ms ease,
+    filter 140ms ease;
+}
+
+#decrement:hover,
+#increment:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.04);
+}
+
+#actualInstalment {
+  margin: 0;
+  color: var(--accent-strong);
+  font-size: 1.06rem;
+}
+
+#actualInstalment.hidden {
+  visibility: hidden;
+  height: 0;
+  margin: 0;
+}
+
+#viewLoanDetails {
+  margin-top: auto;
+  border: 0;
+  border-radius: 12px;
+  padding: 12px 18px;
+  font: inherit;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(160deg, var(--positive), #147c4a);
+  box-shadow: 0 12px 20px rgba(20, 124, 74, 0.28);
+  cursor: pointer;
+  transition:
+    transform 140ms ease,
+    filter 140ms ease;
+}
+
+#viewLoanDetails:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.03);
 }
 
 .loanDetailsDiv {
-  display: none; /* Hide default arrows in Chrome, Safari, Edge */
+  display: none;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  height: 100%;
+  inset: 0;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.603);
-}
-#viewLoanDetails {
-  background-color: rgb(107, 255, 107);
-  border-radius: 5px;
-  padding: 10px;
-  font-size: larger;
+  background: rgba(7, 18, 33, 0.58);
+  backdrop-filter: blur(3px);
+  border-radius: 26px;
+  padding: 14px;
 }
 
-.topDetails {
-  width: 100%;
-  overflow-x: auto;
-}
-.scroll-container {
+.loanDetails {
+  width: min(930px, 100%);
+  max-height: 88%;
+  border: 1px solid rgba(17, 35, 60, 0.16);
+  border-radius: 20px;
+  padding: 14px;
+  background: #fbfdff;
   display: flex;
-  flex-wrap: nowrap;
+  flex-direction: column;
+  gap: 12px;
 }
+
+.topDetails,
 .bottomDetails {
   width: 100%;
   overflow-x: auto;
 }
+
+.scroll-container {
+  display: flex;
+  gap: 10px;
+  flex-wrap: nowrap;
+}
+
 .scroll-item {
-  min-width: 200px;
-  margin: 10px;
-  background-color: #f0f0f0;
-  border: 1px solid black;
+  min-width: 190px;
+  padding: 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(17, 35, 60, 0.12);
   text-align: center;
-  font-weight: bold; /* Make text bold */
-  font-size: large;
+  font-weight: 600;
+  color: var(--text);
+  background: linear-gradient(160deg, #ffffff, #f0f6ff);
+  box-shadow: 0 8px 16px rgba(15, 35, 66, 0.08);
   flex: 0 0 auto;
-  border-radius: 5px;
+}
+
+.scroll-item h3 {
+  margin: 0 0 8px;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.scroll-item p {
+  margin: 0;
+  font-size: 1.02rem;
+}
+
+.login,
+.iform {
+  position: absolute;
+  inset: 0;
+  border-radius: 26px;
+  background: rgba(5, 15, 28, 0.72);
+  backdrop-filter: blur(8px);
 }
 
 .login {
   display: block;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  height: 100%;
-  border-radius: 10px;
-  background-color: rgba(0, 0, 0, 0.952);
 }
 
-div.otpSection1 h2 {
-  color: aliceblue;
+.iform {
+  display: none;
+}
+
+.otpSection1,
+.otpSection {
+  width: min(430px, calc(100% - 28px));
+  margin: 56px auto 0;
+  padding: 24px;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.12);
+  color: #eff5ff;
 }
 
 .otpSection1 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 50px;
+  gap: 10px;
 }
 
 .otpSection {
   display: none;
-  align-items: center;
   flex-direction: column;
-  margin-top: 50px;
+  align-items: center;
+  gap: 10px;
 }
 
-.right:hover {
-  text-decoration: underline;
-  cursor: grab;
+.otpSection1 h2 {
+  margin: 0 0 6px;
 }
-.left:hover {
-  background-color: darkgray;
-  cursor: grab;
+
+#phoneNumber,
+#otpCode,
+#digitInput {
+  width: 100%;
+  max-width: 300px;
+  height: 44px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 10px;
+  padding: 0 12px;
+  font: inherit;
+  color: #eff5ff;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+#phoneNumber::placeholder,
+#otpCode::placeholder,
+#digitInput::placeholder {
+  color: rgba(239, 245, 255, 0.74);
+}
+
+.npp {
+  margin: 12px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.left,
+.right,
+.digitForm button {
+  border: 0;
+  border-radius: 10px;
+  padding: 10px 14px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.left,
+.digitForm button {
+  color: #fff;
+  background: linear-gradient(165deg, var(--accent), var(--accent-strong));
+}
+
+.left:hover,
+.digitForm button:hover {
+  filter: brightness(1.06);
 }
 
 .right {
-  background-color: #6bff6b00;
-  border: 0px;
-  color: red;
-  margin-left: 5px;
+  color: #ffd9df;
+  background: rgba(206, 47, 67, 0.25);
 }
-.left {
-  margin-left: 5px;
-  border: 0px;
+
+.right:hover {
+  background: rgba(206, 47, 67, 0.4);
 }
-.npp {
-  margin: 15px;
-}
+
 .notification {
   position: absolute;
-  top: 13%;
+  top: 28px;
   left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: large;
-  background-color: yellow; /* Green background */
-  color: red;
-  padding: 16px;
-  border-radius: 5px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  transition: opacity 0.5s ease; /* Animate opacity */
+  transform: translateX(-50%);
+  width: min(92%, 520px);
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(206, 47, 67, 0.28);
+  background: #fff1f4;
+  color: #8d2433;
+  font-size: 0.95rem;
+  font-weight: 600;
   opacity: 0;
-  visibility: hidden; /* Hidden by default */
+  visibility: hidden;
+  transition: opacity 250ms ease;
 }
-/* Show the notification */
+
 .notification.show {
   visibility: visible;
   opacity: 1;
 }
 
-.iform {
-  display: none;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  height: 100%;
-  border-radius: 10px;
-  background-color: rgba(0, 0, 0, 0.952);
-}
-
 .digitForm {
+  width: min(430px, calc(100% - 28px));
+  margin: 56px auto 0;
+  padding: 24px;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.12);
+  color: #eff5ff;
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  gap: 10px;
 }
-.digitForm input {
-  width: 50%;
-  padding: 10px;
-  margin: 10px 0;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 16px;
-  text-align: center;
+
+.digitForm h2 {
+  margin: 0 0 6px;
 }
-.digitForm button {
-  width: 50%;
-  padding: 10px;
-  background: #28a745;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
+
 button:disabled {
-  background: gray;
   cursor: not-allowed;
+  opacity: 0.56;
+}
+
+@media (max-width: 640px) {
+  body {
+    padding: 10px;
+  }
+
+  .slider-container {
+    min-height: calc(100vh - 20px);
+    padding: 18px 12px;
+    border-radius: 18px;
+  }
+
+  .loanDetailsDiv,
+  .login,
+  .iform {
+    border-radius: 18px;
+  }
+
+  #viewLoanDetails {
+    width: 100%;
+  }
 }

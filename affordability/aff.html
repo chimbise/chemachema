@@ -1,26 +1,28 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Document </title>
-    <link rel="stylesheet" href="aff.css">
-</head>
-    <body>
-        <div class="main">
-            <div class="container" id="container">
-                
-            </div>
-            <div class="progress-direction">
-                <span class="span-button" id="back"> back </span>
-                <span class="span-button" id="next"> next </span>
-            </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#1478ff" />
+    <link rel="manifest" href="../manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="../pwa/icon-192.svg" />
+    <title>ChemaChema Affordability</title>
+    <link rel="stylesheet" href="aff.css" />
+  </head>
+  <body>
+    <div class="main">
+      <div class="container" id="container"></div>
+      <div class="progress-direction">
+        <span class="span-button" id="back"> back </span>
+        <span class="span-button" id="next"> next </span>
+      </div>
+    </div>
+    <div class="particularsForm" id="particularsForm"></div>
 
-        </div>
-        <div class="particularsForm" id="particularsForm"></div>
-
-        <div class="notification" id="notification"> notification </div>
-        <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
-        <script type="module" src="aff.min.js"></script>
-    </body>
+    <div class="notification" id="notification">notification</div>
+    <script src="../connectivity-banner.js"></script>
+    <script src="../pwa-register.js"></script>
+    <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
+    <script type="module" src="aff.min.js"></script>
+  </body>
 </html>

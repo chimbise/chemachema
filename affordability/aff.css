@@ -1,645 +1,878 @@
-
 body {
-    background-color: #112369;
-    border-radius: 10px;
+  background-color: #112369;
+  border-radius: 10px;
 }
 .progress-direction {
-    margin: 5px;
-    position: relative;
-    padding: 10px;
-    border-radius: 10px;
-    margin-top: 20px; /* Adjust this value to position the child element */
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-
+  margin: 5px;
+  position: relative;
+  padding: 10px;
+  border-radius: 10px;
+  margin-top: 20px; /* Adjust this value to position the child element */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
-.notification{
-    position: absolute;
-    top: 13%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: large;
-    background-color: yellow; /* Green background */
-    color: red;
-    padding: 16px;
-    border-radius: 5px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    transition: opacity 0.5s ease; /* Animate opacity */
-    opacity: 0;
-    visibility: hidden; /* Hidden by default */
+.notification {
+  position: absolute;
+  top: 13%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: large;
+  background-color: yellow; /* Green background */
+  color: red;
+  padding: 16px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  transition: opacity 0.5s ease; /* Animate opacity */
+  opacity: 0;
+  visibility: hidden; /* Hidden by default */
 }
 /* Show the notification */
 .notification.show {
-    visibility: visible;
-    opacity: 1;
+  visibility: visible;
+  opacity: 1;
 }
-.particularsForm{
-    position: absolute;
-    transform: translate(-50%, -50%);
-    font-size: medium;
-    border-radius: 5px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    display: block; /* Hidden by default */
-    overflow-y: auto;  /* Enable vertical scrolling */
-    top: 50%;
-    left: 50%;
-    border: 1px solid rgba(255, 255, 255, 1); /* Reduced transparency for border */
-    background-color: gray; /* Transparent background */
-    border-radius: 10px;
-    width: 80%;
-    height: 80%;
-    padding: 10px;
-    display: none;
-
+.particularsForm {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  font-size: medium;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  display: block; /* Hidden by default */
+  overflow-y: auto; /* Enable vertical scrolling */
+  top: 50%;
+  left: 50%;
+  border: 1px solid rgba(255, 255, 255, 1); /* Reduced transparency for border */
+  background-color: gray; /* Transparent background */
+  border-radius: 10px;
+  width: 80%;
+  height: 80%;
+  padding: 10px;
+  display: none;
 }
 .particularsForm.show {
-    display: none;
+  display: none;
 }
 .form-section {
-    margin-bottom: 20px;
-    border-bottom: 2px solid white; /* White line divider */
+  margin-bottom: 20px;
+  border-bottom: 2px solid white; /* White line divider */
 }
 
 .form-section h3 {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .form-field {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 label {
-    display: inline-block;
-    width: 70%;
-    font-weight: bold;
+  display: inline-block;
+  width: 70%;
+  font-weight: bold;
 }
 
 input[type="text"],
 input[type="tel"] {
-    padding: 5px;
-    width: 200px;
+  padding: 5px;
+  width: 200px;
 }
 
 button {
-    padding: 10px 20px;
-    background-color: #007BFF;
-    color: white;
-    border-radius: 15px;
-    cursor: pointer;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border-radius: 15px;
+  cursor: pointer;
 }
 button:hover {
-    background: #2f3191; /* Gradient background */
+  background: #2f3191; /* Gradient background */
 }
 
 .main {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: #8dc63f; /* Gradient background */
-    border-radius: 10px;
-    width: 80%;
-    height: 80%;
-    padding: 10px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #8dc63f; /* Gradient background */
+  border-radius: 10px;
+  width: 80%;
+  height: 80%;
+  padding: 10px;
 }
 .span-button {
-    background-color: white;
-    border-radius: 10px;
-    padding: 10px;
-    cursor: pointer;
-    text-align: center;
-    font-weight: bold;
-    display: none;
-
+  background-color: white;
+  border-radius: 10px;
+  padding: 10px;
+  cursor: pointer;
+  text-align: center;
+  font-weight: bold;
+  display: none;
 }
 .span-button:hover {
-    background: #8dc63f; /* Gradient background */
+  background: #8dc63f; /* Gradient background */
 }
 
 .container {
-    display: flex;
-    flex-direction: column;
-    margin: 5px;
-    align-items: center;
-    justify-content: space-around;
-    font-weight: bold;
-    height: 100%;
-    font-size: large;
-
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
+  align-items: center;
+  justify-content: space-around;
+  font-weight: bold;
+  height: 100%;
+  font-size: large;
 }
 .basic {
-    display: flex;
-    flex-direction: column;
-    margin: 5px;
-    align-items: start;
-    justify-items: start ;
-    justify-content: space-around;
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
+  align-items: start;
+  justify-items: start;
+  justify-content: space-around;
 }
 .deduction {
-    display: flex;
-    flex-direction: column;
-    margin: 5px;
-    align-items: start;
-    justify-content: space-around;
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
+  align-items: start;
+  justify-content: space-around;
 }
-input{
-
-    margin: 10px 10px 10px 0;
-    padding: 10px;
-    font-size: large;
-    border-radius: 10px;
-    text-align: center;
+input {
+  margin: 10px 10px 10px 0;
+  padding: 10px;
+  font-size: large;
+  border-radius: 10px;
+  text-align: center;
 }
 
 .workPlace {
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
-    border-radius: 10px;
-    font-size: large;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: large;
 }
 .govSub {
-    padding:10px;
-    margin-top: 10px;
-    background-color: white;
-    border-radius:10px 10px 0 0;
+  padding: 10px;
+  margin-top: 10px;
+  background-color: white;
+  border-radius: 10px 10px 0 0;
 }
 .councilSub {
-    padding:10px;
-    background-color: white;
-    border-radius:0 0 10px 10px;
-
-
+  padding: 10px;
+  background-color: white;
+  border-radius: 0 0 10px 10px;
 }
 .bdfSub {
-    padding:10px;
-    margin-top: 10px;
-    background-color: white;
-    border-radius:10px 10px 0 0;
+  padding: 10px;
+  margin-top: 10px;
+  background-color: white;
+  border-radius: 10px 10px 0 0;
 }
 .policeSub {
-    padding:10px;
-    background-color: white;
+  padding: 10px;
+  background-color: white;
 }
 .educationSub {
-    padding:10px;
-    background-color: white;
+  padding: 10px;
+  background-color: white;
 }
 .otherSub {
-    padding:10px;
-    background-color: white;
-    border-radius:0 0 10px 10px;
+  padding: 10px;
+  background-color: white;
+  border-radius: 0 0 10px 10px;
 }
-
-
 
 .publicOfficersSub {
-    padding:10px;
-    margin-top: 10px;
-    background-color: white;
-    border-radius:10px 10px 0 0;
+  padding: 10px;
+  margin-top: 10px;
+  background-color: white;
+  border-radius: 10px 10px 0 0;
 }
-.councilDeptSub{
-    padding:10px;
-    background-color: white;
+.councilDeptSub {
+  padding: 10px;
+  background-color: white;
 }
-.landboardSub{
-    padding:10px;
-    background-color: white;
-    border-radius:0 0 10px 10px;
+.landboardSub {
+  padding: 10px;
+  background-color: white;
+  border-radius: 0 0 10px 10px;
 }
 
 /* CSS to increase the size of radio buttons */
 input[type="radio"] {
-    transform: scale(1.5); /* Adjust the scale factor as needed */
-    margin-right: 10px; /* Add some space between the radio button and label */
+  transform: scale(1.5); /* Adjust the scale factor as needed */
+  margin-right: 10px; /* Add some space between the radio button and label */
 }
-input[type="checkbox"]{
-    transform: scale(1.5); /* Adjust the scale factor as needed */
-    margin: 10px; /* Add some space between the radio button and label */
+input[type="checkbox"] {
+  transform: scale(1.5); /* Adjust the scale factor as needed */
+  margin: 10px; /* Add some space between the radio button and label */
 }
 
 .allowance {
-    max-height: 100%; /* Make it fit within the parent */
-    overflow-y: hidden; /* Enable vertical scrolling */
-    margin-bottom: 10px;
-    border-radius: 10px;
-    width: 100%;
+  max-height: 100%; /* Make it fit within the parent */
+  overflow-y: hidden; /* Enable vertical scrolling */
+  margin-bottom: 10px;
+  border-radius: 10px;
+  width: 100%;
 }
-.newDiv{
-    max-height: 90%; /* Make it fit within the parent */
-    overflow-y: auto; /* Enable vertical scrolling */
-    margin-bottom: 10px;
-    margin-top: 10px;
-    border-radius: 10px;
-    width: 100%;
+.newDiv {
+  max-height: 90%; /* Make it fit within the parent */
+  overflow-y: auto; /* Enable vertical scrolling */
+  margin-bottom: 10px;
+  margin-top: 10px;
+  border-radius: 10px;
+  width: 100%;
 }
-.checkboxDiv{
-    background-color: white;
-    padding:5px;
+.checkboxDiv {
+  background-color: white;
+  padding: 5px;
 }
 
 #textheader {
-    position: absolute;
-    top: 0;
-    z-index: 1;
-    padding: 10px;
+  position: absolute;
+  top: 0;
+  z-index: 1;
+  padding: 10px;
 }
 /* Slide out to the left animation */
 @keyframes slideInLeft {
-    /*
+  /*
     from { transform: translateX(-100%); }
     to { transform: translateX(0); }
     */
-    100% {
-        transform: scale(1);
-        opacity: 1;
-    }
-        
-    0% {
-        transform: scale(0);
-        opacity: 0;
-    }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
 }
 
 /* Slide in from the right animation */
 @keyframes slideInRight {
-    /*
+  /*
     from { transform: translateX(100%); }
     to { transform: translateX(0); }
     */
-    100% {
-        transform: scale(1);
-        opacity: 1;
-    }
-        
-    0% {
-        transform: scale(0);
-        opacity: 0;
-    }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
 }
 /* Animation for shrinking and fading out */
 @keyframes shrinkToCenter {
-    0% {
-        transform: scale(1);
-        opacity: 1;
-    }
-    100% {
-        transform: scale(0);
-        opacity: 0;
-    }
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
 }
 /* Shake animation */
 @keyframes shake {
-    0% { transform: translateX(0); }
-    25% { transform: translateX(-10px); }
-    50% { transform: translateX(10px); }
-    75% { transform: translateX(-10px); }
-    100% { transform: translateX(0); }
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-10px);
+  }
+  50% {
+    transform: translateX(10px);
+  }
+  75% {
+    transform: translateX(-10px);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }
 
 /* Applying the shake effect to the div */
 .shake {
-    animation: shake 0.3s ease;
+  animation: shake 0.3s ease;
 }
 
 .slide-in-left {
-    animation: slideInLeft 0.5s forwards;
+  animation: slideInLeft 0.5s forwards;
 }
 
 .slide-in-right {
-    animation: slideInRight 0.5s forwards;
+  animation: slideInRight 0.5s forwards;
 }
 /* Class to trigger the animation */
 .shrink {
-    animation: shrinkToCenter 0.5s forwards;
+  animation: shrinkToCenter 0.5s forwards;
 }
 .inputWrapper {
-    background-color: white;
-    display: flex;
-    align-items: center;
-    padding: 5px;
-    width: 100%;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  width: 100%;
 }
-.inputWrapper input{
-    width: 30%;
-    font-size: medium;
+.inputWrapper input {
+  width: 30%;
+  font-size: medium;
 }
-.inputWrapper label{
-    width: 70%;
+.inputWrapper label {
+  width: 70%;
 }
-#inputWrapper0{
-    border-radius:10px 10px 0 0;
+#inputWrapper0 {
+  border-radius: 10px 10px 0 0;
 }
 .selectedBox {
-    max-height: 100%; /* Make it fit within the parent */
-    overflow-y: auto; /* Enable vertical scrolling */
-    display: flex;
-    flex-direction: column;
-    margin: 5px;
-    align-items: start;
-    justify-items:start ;
-    justify-content: space-around;
+  max-height: 100%; /* Make it fit within the parent */
+  overflow-y: auto; /* Enable vertical scrolling */
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
+  align-items: start;
+  justify-items: start;
+  justify-content: space-around;
 }
 .newloanPresent {
-    display: flex;
-    flex-direction: column;
-    margin: 5px;
-    justify-content: space-around;
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
+  justify-content: space-around;
 }
 .yes {
-    padding:10px;
-    margin-top: 10px;
-    background-color: white;
-    border-radius:10px 10px 0 0;
+  padding: 10px;
+  margin-top: 10px;
+  background-color: white;
+  border-radius: 10px 10px 0 0;
 }
 .no {
-    padding:10px;
-    background-color: white;
-    border-radius:0 0 10px 10px;
+  padding: 10px;
+  background-color: white;
+  border-radius: 0 0 10px 10px;
 }
 .newloanPresentSelection {
-
-    max-height: 100%; /* Make it fit within the parent */
-    overflow-y: hidden; /* Enable vertical scrolling */
-    margin-bottom: 10px;
-    border-radius: 10px;
-    width: 100%;
+  max-height: 100%; /* Make it fit within the parent */
+  overflow-y: hidden; /* Enable vertical scrolling */
+  margin-bottom: 10px;
+  border-radius: 10px;
+  width: 100%;
 }
-.checkboxDivNewloan{
-    background-color: white;
-    padding:5px;
+.checkboxDivNewloan {
+  background-color: white;
+  padding: 5px;
 }
 #newloan0 {
-    padding:5px;
-    border-radius:10px 10px 0 0;
+  padding: 5px;
+  border-radius: 10px 10px 0 0;
 }
-#newloan8{
-    border-radius:0 0 10px 10px;
+#newloan8 {
+  border-radius: 0 0 10px 10px;
 }
 #textheaderNewloan {
-    position: absolute;
-    top: 0;
-    z-index: 1;
-    padding: 10px;
+  position: absolute;
+  top: 0;
+  z-index: 1;
+  padding: 10px;
 }
 
 .inputWrapperNewloan {
-    background-color: white;
-    display: flex;
-    align-items: center;
-    padding: 5px;
-    width: 100%;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  width: 100%;
 }
-.inputWrapperNewloan input{
-    width: 30%;
-    font-size: medium;
+.inputWrapperNewloan input {
+  width: 30%;
+  font-size: medium;
 }
-.inputWrapperNewloan label{
-    width: 70%;
+.inputWrapperNewloan label {
+  width: 70%;
 }
-#inputWrapperNewloan0{
-    border-radius:10px 10px 0 0;
+#inputWrapperNewloan0 {
+  border-radius: 10px 10px 0 0;
 }
-.selectedBoxNewloan{
-    max-height: 100%; /* Make it fit within the parent */
-    overflow-y: auto; /* Enable vertical scrolling */
-    display: flex;
-    flex-direction: column;
-    margin: 5px;
-    align-items: center;
-    justify-items:center ;
-    justify-content: space-around; 
+.selectedBoxNewloan {
+  max-height: 100%; /* Make it fit within the parent */
+  overflow-y: auto; /* Enable vertical scrolling */
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
+  align-items: center;
+  justify-items: center;
+  justify-content: space-around;
 }
 .settleloanPresentSelection {
-    max-height: 100%; /* Make it fit within the parent */
-    overflow-y: hidden; /* Enable vertical scrolling */
-    margin-bottom: 10px;
-    border-radius: 10px;
-    width: 100%;
+  max-height: 100%; /* Make it fit within the parent */
+  overflow-y: hidden; /* Enable vertical scrolling */
+  margin-bottom: 10px;
+  border-radius: 10px;
+  width: 100%;
 }
-.checkboxDivSettleloan{
-    background-color: white;
-    padding:5px;
+.checkboxDivSettleloan {
+  background-color: white;
+  padding: 5px;
 }
 #settleloan0 {
-    padding:5px;
-    border-radius:10px 10px 0 0;
+  padding: 5px;
+  border-radius: 10px 10px 0 0;
 }
-#settleloan8{
-    border-radius:0 0 10px 10px;
+#settleloan8 {
+  border-radius: 0 0 10px 10px;
 }
-
 
 .inputWrapperSettleloan {
-    background-color: white;
-    display: flex;
-    align-items: center;
-    padding: 5px;
-    width: 100%;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  width: 100%;
 }
-.inputWrapperSettleloan input{
-    width: 30%;
-    font-size: medium;
+.inputWrapperSettleloan input {
+  width: 30%;
+  font-size: medium;
 }
-.inputWrapperSettleloan label{
-    width: 70%;
-}
-
-.selectedBoxSettleloan{
-    max-height: 100%; /* Make it fit within the parent */
-    overflow-y: auto; /* Enable vertical scrolling */
-    display: flex;
-    flex-direction: column;
-    margin: 5px;
-    align-items: center;
-    justify-items:center ;
-    justify-content: space-around; 
+.inputWrapperSettleloan label {
+  width: 70%;
 }
 
-
-
+.selectedBoxSettleloan {
+  max-height: 100%; /* Make it fit within the parent */
+  overflow-y: auto; /* Enable vertical scrolling */
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
+  align-items: center;
+  justify-items: center;
+  justify-content: space-around;
+}
 
 .inputWrapperSettleloanBalance {
-    background-color: white;
-    display: flex;
-    align-items: center;
-    padding: 5px;
-    width: 100%;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  width: 100%;
 }
-.inputWrapperSettleloanBalance input{
-    width: 30%;
-    font-size: medium;
+.inputWrapperSettleloanBalance input {
+  width: 30%;
+  font-size: medium;
 }
-.inputWrapperSettleloanBalance label{
-    width: 70%;
+.inputWrapperSettleloanBalance label {
+  width: 70%;
 }
-.selectedBoxSettleloanBalance{
-    max-height: 100%; /* Make it fit within the parent */
-    overflow-y: auto; /* Enable vertical scrolling */
-    display: flex;
-    flex-direction: column;
-    margin: 5px;
-    align-items: center;
-    justify-items:center ;
-    justify-content: space-around; 
+.selectedBoxSettleloanBalance {
+  max-height: 100%; /* Make it fit within the parent */
+  overflow-y: auto; /* Enable vertical scrolling */
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
+  align-items: center;
+  justify-items: center;
+  justify-content: space-around;
 }
-
 
 .inputWrapperTax {
-    background-color: white;
-    display: flex;
-    align-items: center;
-    padding: 5px;
-    width: 100%;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  width: 100%;
 }
-.inputWrapperTax input{
-    width: 30%;
-    font-size: medium;
+.inputWrapperTax input {
+  width: 30%;
+  font-size: medium;
 }
-.inputWrapperTax label{
-    width: 70%;
+.inputWrapperTax label {
+  width: 70%;
 }
-#inputWrapperTax0{
-    border-radius:10px 10px 0 0;
+#inputWrapperTax0 {
+  border-radius: 10px 10px 0 0;
 }
 
 .notMarried {
-    padding:10px;
-    margin-top: 10px;
-    background-color: white;
-    border-radius:10px 10px 0 0;
+  padding: 10px;
+  margin-top: 10px;
+  background-color: white;
+  border-radius: 10px 10px 0 0;
 }
 .marital {
-    padding:10px;
-    background-color: white;
+  padding: 10px;
+  background-color: white;
 }
 .ocop {
-    padding:10px;
-    background-color: white;
-    border-radius:0 0 10px 10px;
+  padding: 10px;
+  background-color: white;
+  border-radius: 0 0 10px 10px;
 }
-.birthdateDiv{
-    width: 90%;
+.birthdateDiv {
+  width: 90%;
 }
 .birthdateForm {
-    display: flex;
-    align-items: center;
-    justify-items: center ;
-    justify-content: space-around;
-    width: 100%;
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  justify-content: space-around;
+  width: 100%;
 }
-select, input[type="submit"] {
-    font-size: medium; /* Increase font size */
-    padding: 5px; /* Add padding for a larger clickable area */
-    margin-left: 5px; /* Add some margin for spacing */
-    width: 100%; /* Set a width for the select elements */
-    border-radius: 5px;
-    box-sizing: border-box; /* Ensure padding is included in the width */
+select,
+input[type="submit"] {
+  font-size: medium; /* Increase font size */
+  padding: 5px; /* Add padding for a larger clickable area */
+  margin-left: 5px; /* Add some margin for spacing */
+  width: 100%; /* Set a width for the select elements */
+  border-radius: 5px;
+  box-sizing: border-box; /* Ensure padding is included in the width */
 }
-.botusafe20{
-    padding:10px;
-    margin-top: 10px;
-    background-color: white;
-    border-radius:10px 10px 0 0;
+.botusafe20 {
+  padding: 10px;
+  margin-top: 10px;
+  background-color: white;
+  border-radius: 10px 10px 0 0;
 }
-.tawu23{
-    padding:10px;
-    background-color: white;
+.tawu23 {
+  padding: 10px;
+  background-color: white;
 }
-.botusafe23{
-    padding:10px;
-    background-color: white;
+.botusafe23 {
+  padding: 10px;
+  background-color: white;
 }
-.tawu26{
-    padding:10px;
-    background-color: white;
+.tawu26 {
+  padding: 10px;
+  background-color: white;
 }
-.botusafe26{
-    padding:10px;
-    background-color: white;
+.botusafe26 {
+  padding: 10px;
+  background-color: white;
 }
-.metropolitan{
-    padding:10px;
-    background-color: white;
+.metropolitan {
+  padding: 10px;
+  background-color: white;
 }
-.lahisa{
-    padding:10px;
-    background-color: white;
+.lahisa {
+  padding: 10px;
+  background-color: white;
 }
-.botsLife{
-    padding:10px;
-    background-color: white;
+.botsLife {
+  padding: 10px;
+  background-color: white;
 }
-.bpopf{
-    padding:10px;
-    background-color: white;
-    border-radius:0 0 10px 10px;
+.bpopf {
+  padding: 10px;
+  background-color: white;
+  border-radius: 0 0 10px 10px;
 }
-.optionsDiv{
-    display:flex ;
-    flex-direction: column;
-    overflow-y: auto; /* Enable vertical scrolling */
+.optionsDiv {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto; /* Enable vertical scrolling */
 }
-.chooseLoanDiv{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    justify-content: space-around;
-    height: 100%;
+.chooseLoanDiv {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: space-around;
+  height: 100%;
+}
+.l6xers {
+  display: flex;
+  flex-direction: row;
+  margin: 5px;
+  width: 100%;
+  height: 40px;
+}
+.l6xers div,
+.l6xers span {
+  font-size: medium; /* Custom font size for p and span inside .l6xers */
 
-}
-.l6xers{
-    display: flex;
-    flex-direction: row;
-    margin: 5px;
-    width: 100%;
-    height: 40px;
-}
-.l6xers div, .l6xers span {
-    font-size: medium; /* Custom font size for p and span inside .l6xers */
-
-    text-align: center; /* Center the text within the select item */
-    display: flex;
-    align-items: center; /* Center vertically */
-    justify-content: center; /* Center horizontally */
-    border-radius: 5px; /* Optional: round the corners of the select element */
+  text-align: center; /* Center the text within the select item */
+  display: flex;
+  align-items: center; /* Center vertically */
+  justify-content: center; /* Center horizontally */
+  border-radius: 5px; /* Optional: round the corners of the select element */
 }
 
 .l6xers > :first-child {
-    flex: 0 0 40%; /* Fixed to 40% of the width */
-    background-color: rgba(255, 0, 0, 0.658);
-    margin-right: 5px;
-    border-radius: 10px;
-    color: rgba(240, 248, 255, 0.808);
-
+  flex: 0 0 40%; /* Fixed to 40% of the width */
+  background-color: rgba(255, 0, 0, 0.658);
+  margin-right: 5px;
+  border-radius: 10px;
+  color: rgba(240, 248, 255, 0.808);
 }
 
 .l6xers > :nth-child(2) {
-    flex: 0 0 30%; /* Fixed to 40% of the width */
-    background-color: rgba(0, 128, 0, 0.726);
-    text-align: center; /* Optional: center the content inside the sub-elements */
-    margin-right: 5px;
-    border-radius: 10px;
-    color: rgba(240, 248, 255, 0.836);
-
+  flex: 0 0 30%; /* Fixed to 40% of the width */
+  background-color: rgba(0, 128, 0, 0.726);
+  text-align: center; /* Optional: center the content inside the sub-elements */
+  margin-right: 5px;
+  border-radius: 10px;
+  color: rgba(240, 248, 255, 0.836);
 }
 .l6xers > :nth-child(3) {
-    flex: 0 0 30%; /* Fixed to 40% of the width */
-    background-color:whitesmoke;
-    margin-right: 5px;
-    text-align: center; /* Optional: center the content inside the sub-elements */
-    border-radius: 10px;
-
+  flex: 0 0 30%; /* Fixed to 40% of the width */
+  background-color: whitesmoke;
+  margin-right: 5px;
+  text-align: center; /* Optional: center the content inside the sub-elements */
+  border-radius: 10px;
 }
 .l6xers > :nth-child(3) select {
-    width: 80%;      /* Set width to 80% of the containing div */
-    height: 80%;     /* Set height to 80% of the containing div */
-    text-align: center; /* Center the text within the select item */
-    display: flex;
-    align-items: center; /* Center vertically */
-    justify-content: center; /* Center horizontally */
-    margin: auto;
-    border-radius: 5px; /* Optional: round the corners of the select element */
+  width: 80%; /* Set width to 80% of the containing div */
+  height: 80%; /* Set height to 80% of the containing div */
+  text-align: center; /* Center the text within the select item */
+  display: flex;
+  align-items: center; /* Center vertically */
+  justify-content: center; /* Center horizontally */
+  margin: auto;
+  border-radius: 5px; /* Optional: round the corners of the select element */
+}
+/* Modern visual refresh overrides */
+:root {
+  --aff-bg-a: #ebf1f8;
+  --aff-bg-b: #d6e6f7;
+  --aff-card: rgba(255, 255, 255, 0.9);
+  --aff-border: rgba(17, 35, 60, 0.12);
+  --aff-text: #12253d;
+  --aff-muted: #536e8e;
+  --aff-accent: #156ef3;
+  --aff-accent-strong: #114fbe;
+  --aff-positive: #1a9258;
+  --aff-shadow: 0 20px 45px rgba(15, 35, 66, 0.18);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Manrope", "Segoe UI", sans-serif;
+  color: var(--aff-text);
+  background:
+    radial-gradient(
+      circle at 12% 16%,
+      rgba(21, 110, 243, 0.16),
+      transparent 42%
+    ),
+    radial-gradient(circle at 88% 8%, rgba(26, 146, 88, 0.17), transparent 40%),
+    linear-gradient(145deg, var(--aff-bg-a), var(--aff-bg-b));
+}
+
+.main {
+  position: relative;
+  top: auto;
+  left: auto;
+  transform: none;
+  width: min(1100px, calc(100% - 24px));
+  min-height: calc(100vh - 24px);
+  margin: 12px auto;
+  padding: 16px;
+  border-radius: 24px;
+  border: 1px solid var(--aff-border);
+  background: var(--aff-card);
+  box-shadow: var(--aff-shadow);
+}
+
+.container {
+  margin: 0;
+  height: calc(100% - 72px);
+  padding: 14px;
+  border-radius: 18px;
+  border: 1px solid var(--aff-border);
+  background: #f8fbff;
+  overflow: auto;
+}
+
+.progress-direction {
+  margin: 12px 0 0;
+  padding: 12px;
+  border-radius: 14px;
+  border: 1px solid var(--aff-border);
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.span-button {
+  border-radius: 11px;
+  border: 1px solid rgba(17, 35, 60, 0.12);
+  background: #fff;
+  color: var(--aff-text);
+  transition:
+    transform 140ms ease,
+    box-shadow 140ms ease,
+    filter 140ms ease;
+}
+
+.span-button:hover {
+  background: linear-gradient(
+    165deg,
+    var(--aff-accent),
+    var(--aff-accent-strong)
+  );
+  color: #fff;
+  box-shadow: 0 10px 20px rgba(17, 79, 190, 0.3);
+  transform: translateY(-1px);
+}
+
+.notification {
+  top: 24px;
+  transform: translateX(-50%);
+  border: 1px solid rgba(207, 54, 79, 0.3);
+  border-radius: 12px;
+  background: #fff2f5;
+  color: #8f2334;
+  box-shadow: 0 10px 24px rgba(42, 54, 74, 0.2);
+}
+
+.particularsForm {
+  border: 1px solid var(--aff-border);
+  border-radius: 18px;
+  padding: 14px;
+  background: rgba(248, 251, 255, 0.98);
+  box-shadow: var(--aff-shadow);
+}
+
+.form-section {
+  border-bottom: 1px solid rgba(17, 35, 60, 0.14);
+}
+
+.form-section h3,
+label,
+#textheader,
+#textheaderNewloan {
+  color: var(--aff-muted);
+  letter-spacing: 0.02em;
+}
+
+input,
+input[type="text"],
+input[type="tel"],
+select {
+  border: 1px solid rgba(17, 35, 60, 0.18);
+  border-radius: 10px;
+  color: var(--aff-text);
+  background: #fff;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: rgba(21, 110, 243, 0.58);
+  box-shadow: 0 0 0 3px rgba(21, 110, 243, 0.16);
+}
+
+button {
+  border: 0;
+  border-radius: 12px;
+  font-weight: 700;
+  background: linear-gradient(
+    160deg,
+    var(--aff-accent),
+    var(--aff-accent-strong)
+  );
+  box-shadow: 0 12px 20px rgba(17, 79, 190, 0.26);
+}
+
+button:hover {
+  filter: brightness(1.05);
+}
+
+:is(
+  .govSub,
+  .councilSub,
+  .bdfSub,
+  .policeSub,
+  .educationSub,
+  .otherSub,
+  .publicOfficersSub,
+  .councilDeptSub,
+  .landboardSub,
+  .yes,
+  .no,
+  .notMarried,
+  .marital,
+  .ocop,
+  .botusafe20,
+  .tawu23,
+  .botusafe23,
+  .tawu26,
+  .botusafe26,
+  .metropolitan,
+  .lahisa,
+  .botsLife,
+  .bpopf,
+  .checkboxDiv,
+  .checkboxDivNewloan,
+  .checkboxDivSettleloan,
+  .inputWrapper,
+  .inputWrapperNewloan,
+  .inputWrapperSettleloan,
+  .inputWrapperSettleloanBalance,
+  .inputWrapperTax
+) {
+  border: 1px solid rgba(17, 35, 60, 0.08);
+  background: #fff;
+}
+
+.workPlace,
+.allowance,
+.newDiv,
+.newloanPresentSelection,
+.settleloanPresentSelection,
+.selectedBox,
+.selectedBoxNewloan,
+.selectedBoxSettleloan,
+.selectedBoxSettleloanBalance,
+.chooseLoanDiv,
+.optionsDiv {
+  border-radius: 14px;
+}
+
+.l6xers > :first-child,
+.l6xers > :nth-child(2),
+.l6xers > :nth-child(3) {
+  border-radius: 10px;
+}
+
+.l6xers > :first-child {
+  background: #d83f4a;
+  color: #fff;
+}
+
+.l6xers > :nth-child(2) {
+  background: var(--aff-positive);
+  color: #fff;
+}
+
+.l6xers > :nth-child(3) {
+  background: #eef4ff;
+}
+
+@media (max-width: 768px) {
+  .main {
+    width: calc(100% - 14px);
+    min-height: calc(100vh - 14px);
+    margin: 7px auto;
+    padding: 10px;
+    border-radius: 16px;
+  }
+
+  .container {
+    padding: 10px;
+    border-radius: 12px;
+  }
+
+  .particularsForm {
+    width: calc(100% - 14px);
+    height: calc(100% - 14px);
+  }
 }
