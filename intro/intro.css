@@ -447,6 +447,192 @@ label {
   line-height: 1.4;
 }
 
+.taxAddBackModal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  border-radius: 26px;
+  background: rgba(7, 18, 33, 0.62);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+}
+
+.taxAddBackModal.open {
+  display: flex;
+}
+
+.taxAddBackDialog {
+  width: min(560px, 100%);
+  border: 1px solid rgba(17, 35, 60, 0.16);
+  border-radius: 20px;
+  padding: 16px;
+  background: #fbfdff;
+  box-shadow: 0 24px 55px rgba(15, 35, 66, 0.28);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.taxAddBackHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.taxAddBackHeader h2 {
+  margin: 0;
+  font-size: 1.16rem;
+  color: var(--text);
+}
+
+.taxAddBackClose {
+  width: 38px;
+  height: 38px;
+  border: 1px solid rgba(17, 35, 60, 0.14);
+  border-radius: 10px;
+  padding: 0;
+  font: inherit;
+  font-size: 1.3rem;
+  line-height: 1;
+  color: var(--text);
+  background: #fff;
+  box-shadow: 0 8px 16px rgba(15, 35, 66, 0.08);
+}
+
+.taxAddBackFields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.taxAddBackField {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.taxAddBackField label {
+  width: auto;
+  font-size: 0.84rem;
+}
+
+.taxAddBackField input {
+  width: 100%;
+  height: 46px;
+  border: 1px solid rgba(17, 35, 60, 0.16);
+  border-radius: 12px;
+  padding: 0 12px;
+  font: inherit;
+  color: var(--text);
+  background: #fff;
+}
+
+.taxAddBackField--full {
+  grid-column: 1 / -1;
+}
+
+.taxAddBackAllowanceList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.taxAddBackAllowanceRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.taxPermanentAllowanceInput {
+  flex: 1;
+  height: 46px;
+  border: 1px solid rgba(17, 35, 60, 0.16);
+  border-radius: 12px;
+  padding: 0 12px;
+  font: inherit;
+  color: var(--text);
+  background: #fff;
+}
+
+.taxAddBackAllowanceRemove {
+  width: 38px;
+  height: 38px;
+  border: 1px solid rgba(206, 47, 67, 0.28);
+  border-radius: 10px;
+  padding: 0;
+  font: inherit;
+  font-size: 1.2rem;
+  line-height: 1;
+  color: var(--danger);
+  background: #fff;
+  flex: 0 0 auto;
+}
+
+.taxAddBackAllowanceRemove:hover {
+  background: #fff1f4;
+}
+
+.taxAddBackAddAllowance {
+  width: 100%;
+  height: 42px;
+  border: 1px dashed rgba(17, 35, 60, 0.22);
+  border-radius: 10px;
+  padding: 0 12px;
+  font: inherit;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--accent);
+  background: transparent;
+  margin-top: 4px;
+}
+
+.taxAddBackAddAllowance:hover {
+  background: #eef4ff;
+  border-color: var(--accent);
+}
+
+.taxAddBackActions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+.taxAddBackActions button {
+  min-width: 120px;
+  border: 0;
+  border-radius: 12px;
+  padding: 12px 16px;
+  font: inherit;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(160deg, var(--accent), var(--accent-strong));
+  box-shadow: 0 10px 18px rgba(11, 87, 208, 0.25);
+}
+
+.taxAddBackActions button:last-child {
+  color: var(--text);
+  background: #eef4ff;
+  box-shadow: none;
+}
+
+.taxAddBackResult {
+  margin: 0;
+  padding: 14px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(20, 120, 255, 0.25);
+  background: linear-gradient(160deg, #e8f0ff, #dce8ff);
+  color: var(--accent-strong);
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
 .login,
 .iform {
   position: absolute;
@@ -514,6 +700,7 @@ label {
 }
 
 .npp {
+  width: 100%;
   margin: 12px 0 0;
   display: flex;
   align-items: center;
@@ -525,6 +712,8 @@ label {
 .left,
 .right,
 .digitForm button {
+  flex: 1 1 auto;
+  min-width: 0;
   border: 0;
   border-radius: 10px;
   padding: 10px 14px;

@@ -207,7 +207,7 @@
               <button type="button" data-loan-action="tax-add-back">
                 Tax add back
               </button>
-              <button type="button" data-loan-action="settlement-estimate">
+              <button type="button" data-loan-action="settlement-estimate" disabled>
                 Settlement estimate
               </button>
             </div>
@@ -235,7 +235,7 @@
               <button type="button" data-loan-action="tax-add-back">
                 Tax add back
               </button>
-              <button type="button" data-loan-action="settlement-estimate">
+              <button type="button" data-loan-action="settlement-estimate" disabled>
                 Settlement estimate
               </button>
             </div>
@@ -287,6 +287,54 @@
             </div>
             <p class="maxTermResult" id="maxTermResult">
               Enter a date of birth and retirement age to calculate the max term.
+            </p>
+          </div>
+        </div>
+        <div class="taxAddBackModal" id="taxAddBackModal" aria-hidden="true" hidden>
+          <div
+            class="taxAddBackDialog"
+            id="taxAddBackDialog"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="taxAddBackTitle"
+          >
+            <div class="taxAddBackHeader">
+              <h2 id="taxAddBackTitle">Tax Add Back Calculator</h2>
+              <button type="button" class="taxAddBackClose" id="taxAddBackClose">
+                &times;
+              </button>
+            </div>
+            <div class="taxAddBackFields">
+              <div class="taxAddBackField">
+                <label for="taxBasicSalary">Basic Salary (P)</label>
+                <input type="number" id="taxBasicSalary" step="0.01" min="0" />
+              </div>
+              <div class="taxAddBackField taxAddBackField--full">
+                <label>Permanent Allowances (P)</label>
+                <div class="taxAddBackAllowanceList" id="taxPermanentAllowanceList">
+                  <div class="taxAddBackAllowanceRow">
+                    <input type="number" class="taxPermanentAllowanceInput" step="0.01" min="0" placeholder="e.g. 1500" />
+                    <button type="button" class="taxAddBackAllowanceRemove" title="Remove allowance" hidden>×</button>
+                  </div>
+                </div>
+                <button type="button" class="taxAddBackAddAllowance" id="taxAddBackAddAllowance">+ Add allowance</button>
+                <output id="taxPermanentAllowances" hidden>0</output>
+              </div>
+              <div class="taxAddBackField">
+                <label for="taxPensionTax">Pension Tax (P)</label>
+                <input type="number" id="taxPensionTax" step="0.01" min="0" />
+              </div>
+              <div class="taxAddBackField">
+                <label for="taxIncomeTax">Income Tax (P)</label>
+                <input type="number" id="taxIncomeTax" step="0.01" min="0" />
+              </div>
+            </div>
+            <div class="taxAddBackActions">
+              <button type="button" id="taxAddBackCalculate">Calculate</button>
+              <button type="button" id="taxAddBackCancel">Cancel</button>
+            </div>
+            <p class="taxAddBackResult" id="taxAddBackResult">
+              Enter your salary details to calculate tax add back.
             </p>
           </div>
         </div>
