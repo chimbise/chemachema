@@ -1,4 +1,4 @@
-const APP_VERSION = "v1";
+const APP_VERSION = "v2";
 const STATIC_CACHE = `chemachema-static-${APP_VERSION}`;
 const RUNTIME_CACHE = `chemachema-runtime-${APP_VERSION}`;
 const ENTITLEMENT_CACHE_KEY = "./pwa/entitlement-state.json";

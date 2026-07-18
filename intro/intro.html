@@ -201,6 +201,18 @@
               <button class="left" type="button" id="verifyOTP">Login</button>
             </div>
           </div>
+          <div class="loanActionPanel">
+            <div class="loanActions">
+              <button type="button" class="js-max-term">Max term</button>
+              <button type="button" data-loan-action="tax-add-back">
+                Tax add back
+              </button>
+              <button type="button" data-loan-action="settlement-estimate">
+                Settlement estimate
+              </button>
+            </div>
+            <p class="loanActionOutput">Use the actions below to adjust the quote.</p>
+          </div>
         </div>
         <div class="iform" id="iform">
           <form class="digitForm" id="digitForm">
@@ -215,7 +227,69 @@
             <button type="submit" id="submitBtn" disabled>Submit</button>
           </form>
         </div>
-        <button type="button" id="viewLoanDetails">View loan details</button>
+        <div class="loanControlRow">
+          <button type="button" id="viewLoanDetails">View loan details</button>
+          <div class="loanActionPanel loanActionPanel--inline">
+            <div class="loanActions">
+              <button type="button" class="js-max-term">Max term</button>
+              <button type="button" data-loan-action="tax-add-back">
+                Tax add back
+              </button>
+              <button type="button" data-loan-action="settlement-estimate">
+                Settlement estimate
+              </button>
+            </div>
+            <p class="loanActionOutput">Use the actions below to adjust the quote.</p>
+          </div>
+        </div>
+        <div class="maxTermModal" id="maxTermModal" aria-hidden="true" hidden>
+          <div
+            class="maxTermDialog"
+            id="maxTermDialog"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="maxTermTitle"
+          >
+            <div class="maxTermHeader">
+              <h2 id="maxTermTitle">Max term retirement calculator</h2>
+              <button type="button" class="maxTermClose" id="maxTermClose">
+                &times;
+              </button>
+            </div>
+            <div class="maxTermFields">
+              <div class="maxTermField">
+                <label for="maxTermDob">Date of birth</label>
+                <input type="date" id="maxTermDob" autocomplete="bday" />
+              </div>
+              <div class="maxTermField">
+                <label for="maxTermAge">Retirement age</label>
+                <select id="maxTermAge">
+                  <option value="60" selected>60</option>
+                  <option value="62">62</option>
+                  <option value="65">65</option>
+                  <option value="75">75 - Pensioners</option>
+                </select>
+              </div>
+              <div class="maxTermField">
+                <label for="maxTermBuffer">Buffer period (months)</label>
+                <select id="maxTermBuffer">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4" selected>4</option>
+                  <option value="5">5</option>
+                </select>
+              </div>
+            </div>
+            <div class="maxTermActions">
+              <button type="button" id="maxTermCalculate">Calculate</button>
+              <button type="button" id="maxTermCancel">Cancel</button>
+            </div>
+            <p class="maxTermResult" id="maxTermResult">
+              Enter a date of birth and retirement age to calculate the max term.
+            </p>
+          </div>
+        </div>
       </div>
     </div>
     <script src="../connectivity-banner.js"></script>
