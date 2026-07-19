@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ChemaChema — Admin Activation</title>
+    <link rel="stylesheet" href="activate.css" />
+  </head>
+  <body>
+    <div class="admin-panel">
+      <button type="button" class="admin-back-btn" id="adminBackBtn">← Back to Calculator</button>
+      <div class="admin-login" id="adminLogin">
+        <h2>Admin Login</h2>
+        <input type="password" id="adminPassword" placeholder="Enter admin password" />
+        <button type="button" id="adminLoginBtn">Login</button>
+        <p class="admin-msg" id="adminLoginMsg"></p>
+      </div>
+
+      <div class="admin-dashboard" id="adminDashboard" hidden>
+        <h2>User Activation</h2>
+
+        <div class="activate-form">
+          <div class="form-field">
+            <label for="activatePhone">Phone Number</label>
+            <input type="text" id="activatePhone" placeholder="75025470" />
+          </div>
+          <div class="form-field">
+            <label for="activateDays">Days of access</label>
+            <select id="activateDays">
+              <option value="31" selected>31 days</option>
+              <option value="7">7 days</option>
+              <option value="14">14 days</option>
+              <option value="60">60 days</option>
+              <option value="90">90 days</option>
+              <option value="365">365 days</option>
+            </select>
+          </div>
+          <button type="button" id="activateBtn">Activate / Renew</button>
+          <button type="button" id="deactivateBtn" class="danger">Deactivate</button>
+          <p class="admin-msg" id="activateMsg"></p>
+        </div>
+
+        <div class="user-list" id="userList">
+          <h3>Registered Users</h3>
+          <button type="button" id="refreshUsersBtn">Refresh</button>
+          <div id="userTableContainer"></div>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="activate.js"></script>
+  </body>
+</html>

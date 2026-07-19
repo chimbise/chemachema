@@ -179,6 +179,14 @@
             </div>
           </div>
         </div>
+        <div class="adminBtnContainer" id="adminBtnContainer" style="display:none;">
+          <button type="button" class="admin-btn" id="adminBtn">Admin</button>
+        </div>
+        <div class="admin-modal-overlay" id="adminModalOverlay" hidden>
+          <div class="admin-modal-content" id="adminModalContent">
+            <iframe id="adminIframe" src="../admin/activate.html" title="Admin Panel"></iframe>
+          </div>
+        </div>
         <div class="login" id="login">
           <div class="notification" id="notification">notification</div>
           <div class="otpSection1" id="otpSection1">
@@ -211,7 +219,6 @@
                 Settlement estimate
               </button>
             </div>
-            <p class="loanActionOutput">Use the actions below to adjust the quote.</p>
           </div>
         </div>
         <div class="iform" id="iform">
@@ -235,11 +242,7 @@
               <button type="button" data-loan-action="tax-add-back">
                 Tax add back
               </button>
-              <button type="button" data-loan-action="settlement-estimate" disabled>
-                Settlement estimate
-              </button>
             </div>
-            <p class="loanActionOutput">Use the actions below to adjust the quote.</p>
           </div>
         </div>
         <div class="maxTermModal" id="maxTermModal" aria-hidden="true" hidden>
@@ -288,6 +291,51 @@
             <p class="maxTermResult" id="maxTermResult">
               Enter a date of birth and retirement age to calculate the max term.
             </p>
+          </div>
+        </div>
+        <div class="registerModal" id="registerModal" aria-hidden="true" hidden>
+          <div
+            class="registerDialog"
+            id="registerDialog"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="registerTitle"
+          >
+            <div class="registerHeader">
+              <h2 id="registerTitle">Register for Loan Calculator</h2>
+              <button type="button" class="registerClose" id="registerClose">
+                &times;
+              </button>
+            </div>
+            <div class="registerBody">
+              <div class="registerPrice">
+                <span class="registerPriceAmount">P100</span>
+                <span class="registerPriceLabel">per month</span>
+              </div>
+              <div class="registerPaymentMethods">
+                <h3>Payment Options</h3>
+                <table class="registerPaymentTable">
+                  <tbody>
+                    <tr>
+                      <td class="registerPaymentLabel">Pay2Cell</td>
+                      <td class="registerPaymentNumber">78282260</td>
+                    </tr>
+                    <tr>
+                      <td class="registerPaymentLabel">Orange Money</td>
+                      <td class="registerPaymentNumber">78282260</td>
+                    </tr>
+                    <tr>
+                      <td class="registerPaymentLabel">MyZaka</td>
+                      <td class="registerPaymentNumber">74614757</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="registerActions">
+              <button type="button" id="registerWhatsApp">Chat on WhatsApp</button>
+              <button type="button" id="registerCancel">Close</button>
+            </div>
           </div>
         </div>
         <div class="taxAddBackModal" id="taxAddBackModal" aria-hidden="true" hidden>
@@ -341,6 +389,7 @@
       </div>
     </div>
     <script src="../connectivity-banner.js"></script>
+    <script src="../subscription-banner.js"></script>
     <script src="../pwa-register.js"></script>
     <script type="module" src="intro.min.js"></script>
   </body>

@@ -290,16 +290,22 @@ label {
   flex: 1 1 520px;
 }
 
+.loanActionPanel--inline .loanActions {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
 .loanActions {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 10px;
+  margin: 0 10px;
 }
 
 .loanActions button {
-  min-height: 46px;
-  padding: 10px 12px;
-  border-radius: 12px;
+  min-height: 38px;
+  padding: 6px 10px;
+  font-size: 0.88rem;
+  border-radius: 10px;
   border: 1px solid rgba(17, 35, 60, 0.14);
   background: linear-gradient(160deg, #ffffff, #eef4ff);
   color: var(--text);
@@ -837,4 +843,202 @@ button:disabled {
   #viewLoanDetails {
     width: 100%;
   }
+}
+
+.adminBtnContainer {
+  position: absolute;
+  top: 10px;
+  right: 16px;
+  z-index: 10;
+}
+
+.admin-btn {
+  border: 0;
+  border-radius: 10px;
+  padding: 6px 14px;
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(160deg, #1e9f61, #147c4a);
+  box-shadow: 0 8px 16px rgba(30, 159, 97, 0.28);
+  cursor: pointer;
+  opacity: 0.72;
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.admin-btn:hover {
+  opacity: 1;
+  transform: translateY(-1px);
+}
+
+.admin-modal-overlay {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: rgba(7, 18, 33, 0.62);
+  backdrop-filter: blur(4px);
+  z-index: 2000;
+}
+
+.admin-modal-overlay.open {
+  display: flex;
+}
+
+.admin-modal-content {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: flex;
+}
+
+.admin-modal-content iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.registerModal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  border-radius: 26px;
+  background: rgba(7, 18, 33, 0.62);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+}
+
+.registerModal.open {
+  display: flex;
+}
+
+.registerDialog {
+  width: min(460px, 100%);
+  border: 1px solid rgba(17, 35, 60, 0.16);
+  border-radius: 20px;
+  padding: 16px;
+  background: #fbfdff;
+  box-shadow: 0 24px 55px rgba(15, 35, 66, 0.28);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.registerHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.registerHeader h2 {
+  margin: 0;
+  font-size: 1.16rem;
+  color: var(--text);
+}
+
+.registerClose {
+  width: 38px;
+  height: 38px;
+  border: 1px solid rgba(17, 35, 60, 0.14);
+  border-radius: 10px;
+  padding: 0;
+  font: inherit;
+  font-size: 1.3rem;
+  line-height: 1;
+  color: var(--text);
+  background: #fff;
+  box-shadow: 0 8px 16px rgba(15, 35, 66, 0.08);
+  cursor: pointer;
+}
+
+.registerBody {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.registerPrice {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 8px;
+  padding: 16px;
+  border-radius: 14px;
+  background: linear-gradient(160deg, #e8f0ff, #dce8ff);
+}
+
+.registerPriceAmount {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--accent-strong);
+}
+
+.registerPriceLabel {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.registerPaymentMethods h3 {
+  margin: 0 0 8px;
+  font-size: 0.9rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.registerPaymentTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.registerPaymentTable td {
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(17, 35, 60, 0.06);
+}
+
+.registerPaymentLabel {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.registerPaymentNumber {
+  text-align: right;
+  font-weight: 700;
+  color: var(--accent-strong);
+  letter-spacing: 0.02em;
+}
+
+.registerActions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+.registerActions button {
+  min-width: 120px;
+  border: 0;
+  border-radius: 12px;
+  padding: 12px 16px;
+  font: inherit;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(160deg, var(--positive), #147c4a);
+  box-shadow: 0 10px 18px rgba(30, 159, 97, 0.25);
+  cursor: pointer;
+}
+
+.registerActions button:last-child {
+  color: var(--text);
+  background: #eef4ff;
+  box-shadow: none;
 }
