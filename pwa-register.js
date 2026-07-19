@@ -4,6 +4,26 @@
   }
 
   const ENTITLEMENT_STORAGE_KEY = "offlineEntitlement";
+  var deferredPrompt = null;
+
+  window.addEventListener("beforeinstallprompt", function (e) {
+    e.preventDefault();
+    deferredPrompt = e;
+  });
+
+  window.requestPwaInstall = function () {
+    if (!deferredPrompt) {
+      return Promise.reject(new Error("Install prompt not available"));
+    }
+    return deferredPrompt.prompt().then(function (result) {
+      deferredPrompt = null;
+      return result;
+    });
+  };
+
+  window.isPwaInstallable = function () {
+    return !!deferredPrompt;
+  };
 
   function getStoredEntitlementPayload() {
     try {
