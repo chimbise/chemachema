@@ -41,6 +41,9 @@ var deactivateBtn = document.getElementById("deactivateBtn");
 var activateMsg = document.getElementById("activateMsg");
 var refreshUsersBtn = document.getElementById("refreshUsersBtn");
 var userTableContainer = document.getElementById("userTableContainer");
+var allUsers = [];
+var filterPhone = document.getElementById("filterPhone");
+var filterStatus = document.getElementById("filterStatus");
 
 function getFutureExpiryDate(days) {
   var d = new Date();
@@ -165,14 +168,17 @@ async function loadUsers() {
         var expiry = new Date(sub);
         status = now > expiry ? "Expired (" + sub + ")" : "Active until " + sub;
       }
+      var isActive = status.indexOf("Active") === 0;
       users.push({
         phone: data.phoneNumber || "",
-        password: data.password || "",
+        docId: doc.id,
         sub: sub,
         status: status,
+        isActive: isActive,
       });
     });
-    renderUserTable(users);
+    allUsers = users;
+    filterAndRender();
   } catch (err) {
     userTableContainer.innerHTML = "<p style='color:#ce2f43'>Failed to load: " + err.message + "</p>";
   } finally {
@@ -180,16 +186,81 @@ async function loadUsers() {
     refreshUsersBtn.textContent = "Refresh";
   }
 }
+function filterAndRender() {
+  var phoneFilter = (filterPhone && filterPhone.value || "").trim().toLowerCase();
+  var statusFilter = filterStatus && filterStatus.value || "all";
+  var filtered = allUsers.filter(function (u) {
+    if (phoneFilter && u.phone.toLowerCase().indexOf(phoneFilter) === -1) {
+      return false;
+    }
+    if (statusFilter === "active" && !u.isActive) {
+      return false;
+    }
+    if (statusFilter === "expired" && u.isActive) {
+      return false;
+    }
+    return true;
+  });
+  renderUserTable(filtered);
+}
+filterPhone && filterPhone.addEventListener("input", function () {
+  filterAndRender();
+});
+filterStatus && filterStatus.addEventListener("change", function () {
+  filterAndRender();
+});
 
 function renderUserTable(users) {
   if (!users.length) {
-    userTableContainer.innerHTML = "<p>No users found.</p>";
+    userTableContainer.innerHTML = "<p>No users match the filter.</p>";
     return;
   }
-  var html = "<table><thead><tr><th>Phone</th><th>Password</th><th>Status</th></tr></thead><tbody>";
+  var html = "<table><thead><tr><th>Phone</th><th>Doc ID</th><th>Status</th><th>Action</th></tr></thead><tbody>";
   users.forEach(function (u) {
-    html += "<tr><td>" + u.phone + "</td><td>" + u.password + "</td><td>" + u.status + "</td></tr>";
+    var actionHtml;
+    if (u.isActive) {
+      actionHtml = "<button class=\"action-btn action-deactivate\" data-docid=\"" + u.docId + "\">Deactivate</button>";
+    } else {
+      actionHtml = "<button class=\"action-btn action-activate\" data-docid=\"" + u.docId + "\">Activate</button>";
+    }
+    html += "<tr><td>" + u.phone + "</td><td>" + u.docId + "</td><td>" + u.status + "</td><td>" + actionHtml + "</td></tr>";
   });
   html += "</tbody></table>";
   userTableContainer.innerHTML = html;
+
+  document.querySelectorAll(".action-btn").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var docId = btn.getAttribute("data-docid");
+      if (btn.classList.contains("action-deactivate")) {
+        quickDeactivate(docId);
+      } else {
+        quickActivate(docId);
+      }
+    });
+  });
+}
+async function quickActivate(docId) {
+  try {
+    var expiryDate = getFutureExpiryDate(31);
+    await setDoc(
+      doc(db, "registered_users", docId),
+      { sub: expiryDate },
+      { merge: true }
+    );
+    loadUsers();
+  } catch (err) {
+    console.error("Quick activate failed:", err);
+  }
+}
+async function quickDeactivate(docId) {
+  try {
+    await setDoc(
+      doc(db, "registered_users", docId),
+      { sub: "false" },
+      { merge: true }
+    );
+    loadUsers();
+  } catch (err) {
+    console.error("Quick deactivate failed:", err);
+  }
 }

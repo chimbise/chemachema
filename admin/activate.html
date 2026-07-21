@@ -42,6 +42,14 @@
 
         <div class="user-list" id="userList">
           <h3>Registered Users</h3>
+          <div class="filter-bar">
+            <input type="text" id="filterPhone" placeholder="Filter by phone..." />
+            <select id="filterStatus">
+              <option value="all">All</option>
+              <option value="active">Active</option>
+              <option value="expired">Expired</option>
+            </select>
+          </div>
           <button type="button" id="refreshUsersBtn">Refresh</button>
           <div id="userTableContainer"></div>
         </div>
